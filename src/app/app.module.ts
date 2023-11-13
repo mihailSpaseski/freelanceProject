@@ -8,11 +8,15 @@ import { AboutusComponent } from './home/aboutus/aboutus.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactUsComponent } from './home/contact-us/contact-us.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'home', component: AppComponent },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'about-us', component: AboutusComponent },
+  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'login-register', component: LoginComponent },
+  //TODO: NOT FOUND ROUTE / DEFAULT ROUTE
 ];
 
 @NgModule({
@@ -21,7 +25,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     AboutusComponent,
     HomeComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
