@@ -9,6 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactUsComponent } from './home/contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
   { path: 'about-us', component: AboutusComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'login-register', component: LoginComponent },
-  //TODO: NOT FOUND ROUTE / DEFAULT ROUTE
+  { path: '**', component: NotFoundComponent },
+  { path: '404', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     AboutusComponent,
     HomeComponent,
     ContactUsComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
