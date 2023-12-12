@@ -12,6 +12,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FoodComponent } from './home/categories/food/food.component';
 import { TourismComponent } from './home/categories/tourism/tourism.component';
 import { HrComponent } from './home/categories/hr/hr.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,15 @@ import { HrComponent } from './home/categories/hr/hr.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyCSDrOmWXOAKB74JDbOZhQqvRLf4ZlWXgk",
+      authDomain: "sellerworld-455be.firebaseapp.com",
+      projectId: "sellerworld-455be",
+      storageBucket: "sellerworld-455be.appspot.com",
+      messagingSenderId: "330933858571",
+      appId: "1:330933858571:web:8020c06543ddbb7719f20e",
+      measurementId: "G-2KW5Y81LYB"
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent, NavbarComponent, AboutusComponent]
