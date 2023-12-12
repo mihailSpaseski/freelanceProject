@@ -15,6 +15,7 @@ import { HrComponent } from './home/categories/hr/hr.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     NotFoundComponent,
     FoodComponent,
     TourismComponent,
-    HrComponent
+    HrComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

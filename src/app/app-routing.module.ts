@@ -8,6 +8,7 @@ import { AboutusComponent } from './home/aboutus/aboutus.component';
 import { FoodComponent } from './home/categories/food/food.component';
 import { HrComponent } from './home/categories/hr/hr.component';
 import { TourismComponent } from './home/categories/tourism/tourism.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
     { path: 'food', component: FoodComponent},
     { path: 'human-resources', component: HrComponent},
     { path: 'tourism', component: TourismComponent},
+    { path: 'register', component: RegisterComponent },
     { path: '**', component: NotFoundComponent },
     { path: '404', component: NotFoundComponent },
   ];
