@@ -8,5 +8,5 @@ export const environment = {
         appId: "1:330933858571:web:8020c06543ddbb7719f20e",
         measurementId: "G-2KW5Y81LYB"
     },
-    production: false
+    production: true
 }

@@ -12,19 +12,19 @@
     <div class="card p-5" style="width: 400px;">
         <h2 class="text-center mb-4">Please Login</h2>
 
-        <form>
+        <form [formGroup]="loginForm">
             <div class="mb-3">
                 <label for="email" class="form-label">Username or Email:</label>
-                <input type="email" id="email" class="form-control" required placeholder="Enter Username or Email">
+                <input formControlName="username" type="email" id="email" class="form-control" required placeholder="Enter Username or Email">
             </div>
 
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="password" id="password" class="form-control" required placeholder="Enter your password">
+                <input formControlName="password" type="password" id="password" class="form-control" required placeholder="Enter your password">
             </div>
 
             <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button (click)="loginWithEmailPassword()" class="btn btn-primary">Login</button>
             </div>
             <div class="mb-3 text-center">
                 <button type="submit" class="btn btn-link">Forgot Password</button>
@@ -32,6 +32,9 @@
         </form>
 
         <div class="text-center">
+            <div>
+                Don't have an account yet?
+            </div>
             <button class="btn btn-link" routerLink="/register" routerLinkActive="active"
                 ariaCurrentWhenActive="page">Sign Up</button>
         </div>
