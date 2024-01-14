@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MarketingComponent } from './home/marketing/marketing.component';
 import { EventsComponent } from './home/events/events.component';
 import { NewsComponent } from './home/news/news.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NewsComponent } from './home/news/news.component';
     RegisterComponent,
     MarketingComponent,
     EventsComponent,
-    NewsComponent
+    NewsComponent,
+    MyprofileComponent
   ],
   imports: [
     BrowserModule,

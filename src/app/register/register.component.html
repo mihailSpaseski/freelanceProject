@@ -4,25 +4,26 @@
     <title>Register Page</title>
 </head>
 
-
-
 <div class="container-fluid">
-
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" (change)="disableFields()">
-
 
     <div class="row mt-3">
         <div class="col-sm-6">
 
-            <h1 class="text-center">I am a USER</h1>
+            <h1 class="text-center">User Account</h1>
 
-            <div class="card">
+            <div class="card" [formGroup]="registerForm">
                 <div class="card-body text-center">
-                    <form [formGroup]="loginForm">
+                    <form [formGroup]="registerForm">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Username or Email:</label>
+                            <label for="email" class="form-label">Email:</label>
                             <input formControlName="username" type="email" id="email" class="form-control" required
                                 placeholder="Enter Username or Email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Phone Number:</label>
+                            <input formControlName="phoneNumber" type="number" id="phoneNumber" class="form-control"
+                                required placeholder="07x xxx xxx">
                         </div>
 
                         <div class="mb-3">
@@ -31,68 +32,32 @@
                                 required placeholder="Enter your password">
                         </div>
 
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Confirm Password:</label>
+                            <input formControlName="confirmPassword" type="password" id="confirmPassword"
+                                class="form-control" required placeholder="Enter your password">
+                        </div>
+
                         <div class="mb-3 text-center">
-                            <button (click)="registerWithEmailPassword()" class="btn btn-primary">Login</button>
+                            <button (click)="registerWithEmailPassword()" [disabled]="registerForm.invalid"
+                                class="btn btn-primary">Create Account</button>
                         </div>
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn btn-link">Forgot Password</button>
                         </div>
                     </form>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
         <div class="col-sm-6">
 
-            <h1 class="text-center">I am a COMPANY</h1>
+            <h1 class="text-center">Company Account</h1>
 
             <div class="card">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h1>Coming Soon!</h1>
                 </div>
             </div>
         </div>
     </div>
 </div>
-  
-  
-
-
-<!-- <div class="bg-light d-flex align-items-center justify-content-center" style="height: 80vh;">
-
-    <div class="card p-5" style="width: 400px;">
-        <h2 class="text-center mb-4">Please Register</h2>
-
-        <form [formGroup]="loginForm">
-            <div class="mb-3">
-                <label for="email" class="form-label">Username or Email:</label>
-                <input formControlName="username" type="email" id="email" class="form-control" required
-                    placeholder="Enter Username or Email">
-            </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input formControlName="password" type="password" id="password" class="form-control" required
-                    placeholder="Enter your password">
-            </div>
-
-            <div class="mb-3 text-center">
-                <button (click)="registerWithEmailPassword()" class="btn btn-primary">Login</button>
-            </div>
-            <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-link">Forgot Password</button>
-            </div>
-        </form>
-
-        <div class="text-center">
-            <div>
-                Already have an account?
-            </div>
-            <button class="btn btn-link" routerLink="/login" routerLinkActive="active"
-                ariaCurrentWhenActive="page">Login</button>
-        </div>
-    </div>
-
-</div> -->

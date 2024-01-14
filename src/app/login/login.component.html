@@ -8,7 +8,7 @@
 
 
     <div class="card p-5" style="width: 400px;">
-        <h2 class="text-center mb-4">Please Login</h2>
+        <h2 class="text-center mb-4">Login</h2>
 
         <form [formGroup]="loginForm">
             <div class="mb-3">
@@ -22,7 +22,7 @@
             </div>
 
             <div class="mb-3 text-center">
-                <button (click)="loginWithEmailPassword()" class="btn btn-primary">Login</button>
+                <button (click)="loginWithEmailPassword()" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
             </div>
             <div class="mb-3 text-center">
                 <button type="submit" class="btn btn-link">Forgot Password</button>

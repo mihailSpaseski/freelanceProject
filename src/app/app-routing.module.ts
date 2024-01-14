@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { MarketingComponent } from './home/marketing/marketing.component';
 import { EventsComponent } from './home/events/events.component';
 import { NewsComponent } from './home/news/news.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'marketing', component: MarketingComponent },
     { path: 'events', component: EventsComponent },
     { path: 'news', component: NewsComponent },
+    { path: 'my_profile', component: MyprofileComponent },
     { path: '**', component: NotFoundComponent },
     { path: '404', component: NotFoundComponent },
   ];

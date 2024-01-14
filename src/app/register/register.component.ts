@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../login/services/authentication.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-register',
@@ -10,31 +11,33 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  fieldsDisabled = false; // Initially enabled
+  hide: boolean = true;
+  hideConfirmPassword: boolean = true;
 
-  disableFields() {
-    this.fieldsDisabled = !this.fieldsDisabled; // Toggle state
-  }
-
-  loginForm: FormGroup = new FormGroup({
+  registerForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    phoneNumber: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    confirmPassword: new FormControl('', [Validators.required]),
   })
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private authService: AuthenticationService,
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) { }
 
-  registerWithEmailPassword(){
-    console.log(this.loginForm.value);
-    const userData = Object.assign(this.loginForm.value, { email: this.loginForm.value.username });
+  registerWithEmailPassword() {
 
-    this.authenticationService.registerWithEmailPassword(userData).then((res: any) => {
-      this.router.navigateByUrl('home')
+    const userData = Object.assign(this.registerForm.value, { email: this.registerForm.value.username });
+
+    this.authService.registerWithEmailPassword(userData).then((res: any) => {
+      this.router.navigate(['/login']);
+      this.afAuth.signOut();
+      window.alert('Registration successful, please login');
     }).catch((err: any) => {
       console.error(err);
+      window.alert('Error has occured: ' + err);
     })
   }
 }
