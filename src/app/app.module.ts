@@ -43,7 +43,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     ReactiveFormsModule,
-    FormsModule 
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavbarComponent]
