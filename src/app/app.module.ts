@@ -4,48 +4,29 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { FoodComponent } from './home/categories/food/food.component';
-import { TourismComponent } from './home/categories/tourism/tourism.component';
-import { HrComponent } from './home/categories/hr/hr.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { RegisterComponent } from './register/register.component';
 import { environment } from 'src/environment/environment';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MarketingComponent } from './home/marketing/marketing.component';
-import { EventsComponent } from './home/events/events.component';
-import { NewsComponent } from './home/news/news.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
+import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
+import { PagesModule } from "./pages/pages.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    LoginComponent,
-    NotFoundComponent,
-    FoodComponent,
-    TourismComponent,
-    HrComponent,
-    RegisterComponent,
-    MarketingComponent,
-    EventsComponent,
-    NewsComponent,
-    MyprofileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFireDatabaseModule,
+    PagesModule,
+    SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent, NavbarComponent]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

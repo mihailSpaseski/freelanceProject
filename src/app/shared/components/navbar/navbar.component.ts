@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { switchMap } from 'rxjs';
-import { AuthenticationService } from '../login/services/authentication.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,5 +18,5 @@ export class NavbarComponent  {
               private authService: AuthenticationService) { }
 
 
-    
+
 }

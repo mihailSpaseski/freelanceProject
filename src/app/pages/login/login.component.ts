@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
     const userData = Object.assign(this.loginForm.value, { email: this.loginForm.value.username });
 
-    this.authService.loginWithEmailPassword(userData).then((res: any) => {
+    this.authService.loginWithEmailPassword(userData).then(() => {
       this.router.navigateByUrl('home');
       window.alert('Login Successful');
     }).catch((err: any) => {
