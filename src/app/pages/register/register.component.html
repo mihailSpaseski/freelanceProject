@@ -55,7 +55,127 @@
 
             <div class="card">
                 <div class="card-body text-center">
-                    <h1>Coming Soon!</h1>
+                    <form [formGroup]="companyRegisterForm">
+
+
+                        <h3 class="mb-3">Sign Up And Start Contacting Suppliers Today!</h3>
+
+                        <div id="carouselExampleIndicators" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="ms-3 me-3">
+
+                                    <div class="carousel-item active">
+
+                                        <div class="mb-3">
+                                            <label for="companyName" class="form-label">Your Company Name:</label>
+                                            <input formControlName="companyName" type="text" id="companyName"
+                                                class="form-control" required placeholder="Enter Your Company Name">
+                                        </div>
+
+                                        <label class="form-label">Countries:</label>
+                                        <div class="input-group mb-3">
+
+                                            <input type="text" class="form-control" formControlName="enterCountry"
+                                                placeholder="Enter Your Country Here"
+                                                aria-label="Example text with button addon"
+                                                aria-describedby="countriesInput">
+
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="mb-3 text-center">
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input me-3" type="radio"
+                                                    name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    I am primarily a Buyer.
+                                                </label>
+                                            </div>
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input me-3" type="radio"
+                                                    name="flexRadioDefault" id="flexRadioDefault2">
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    I am primarily a Seller.
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 text-center">
+                                            <button class="btn btn-primary" type="button"
+                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                                aria-current="true" aria-label="Slide 1"> Next </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="carousel-item">
+
+                                        <div class="mb-3">
+                                            <label for="fullName" class="form-label">Your Full Name:</label>
+                                            <input formControlName="fullName" type="text" id="fullName"
+                                                class="form-control" required placeholder="Enter Your Full Name">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="emailAddress" class="form-label">Your Email Address:</label>
+                                            <input formControlName="emailAddress" type="email" id="emailAddress"
+                                                class="form-control" required placeholder="Enter Your Email Address">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="phoneNumberWithAreaCode" class="form-label">Your Phone
+                                                Number:</label>
+                                            <input formControlName="phoneNumberWithAreaCode" type="tel"
+                                                id="phoneNumberWithAreaCode" class="form-control" required
+                                                placeholder="Enter Your Phone Number">
+                                        </div>
+
+                                        <div class="mb-3 text-center">
+                                            <button class="btn btn-primary me-3" type="button"
+                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                                aria-current="true" aria-label="Slide 0"> Back </button>
+                                            <button class="btn btn-primary" type="button"
+                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                                aria-current="true" aria-label="Slide 2"> Next </button>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+
+                                        <div class="mb-3">
+                                            <label for="productWantToBuy" class="form-label">Product you want to
+                                                buy:</label>
+                                            <input formControlName="productWantToBuy" type="text" id="productWantToBuy"
+                                                class="form-control" required
+                                                placeholder="Enter a product you want to buy">
+                                        </div>
+
+                                        <h3>TODO: CAPTCHA</h3>
+
+                                        <div class="mb-3 text-center">
+                                            <button class="btn btn-primary me-3" type="button"
+                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                                aria-current="true" aria-label="Slide 1"> Back </button>
+
+                                            <button class="btn btn-primary" type="button"
+                                                [disabled]="companyRegisterForm.invalid"> Submit </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

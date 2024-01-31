@@ -22,7 +22,8 @@
         </div>
         <div class="col-8">
             <ul>
-                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
                     Create New
                 </button>
 
@@ -36,12 +37,17 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ...
+                                <label for="default input example" class="form-label">Example textarea</label>
+                                <input class="form-control" type="text" placeholder="Default input"
+                                    aria-label="default input example">
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" (click)="addCategory()">Save changes</button>
-                                <button type="button" class="btn btn-primary" (click)="updateCategory()">Update changes</button>
+                                <button type="button" class="btn btn-primary" (click)="addCategory()">Save
+                                    changes</button>
+                                <button type="button" class="btn btn-primary" (click)="updateCategory()">Update
+                                    changes</button>
                             </div>
                         </div>
                     </div>
