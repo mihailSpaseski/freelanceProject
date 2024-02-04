@@ -2,21 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import { CategoryNavigationButtonComponent } from './components/category-navigation-button/category-navigation-button.component';
 
 
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    CategoryNavigationButtonComponent
   ],
   imports: [
     CommonModule,
     RouterLinkActive,
     RouterLink
   ],
-  exports: [
-    NavbarComponent
-  ],
+    exports: [
+        NavbarComponent,
+        CategoryNavigationButtonComponent
+    ],
   bootstrap: [NavbarComponent]
 })
 export class SharedModule { }

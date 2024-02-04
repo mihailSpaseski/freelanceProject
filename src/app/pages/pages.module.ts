@@ -11,6 +11,7 @@ import { EventsComponent } from "./home/events/events.component";
 import { MarketingComponent } from "./home/marketing/marketing.component";
 import { NewsComponent } from "./home/news/news.component";
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import { SharedModule } from "../shared/shared.module";
 
 
 
@@ -31,6 +32,7 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
     ReactiveFormsModule,
     RouterLinkActive,
     RouterLink,
+    SharedModule,
   ],
    exports: [
      HomeComponent,

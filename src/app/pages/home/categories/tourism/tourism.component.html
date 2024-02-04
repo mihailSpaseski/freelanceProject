@@ -3,21 +3,7 @@
 <div class="container mt-2 mb-5">
   <div class="row">
     <div class="col-3">
-      <div class="dropdown me-2">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Categories
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" routerLink="/food" routerLinkActive="active"
-                 ariaCurrentWhenActive="page">Food</a></li>
-
-          <li><a class="dropdown-item" routerLink="/tourism" routerLinkActive="active"
-                 ariaCurrentWhenActive="page">Tourism</a></li>
-
-          <li><a class="dropdown-item" routerLink="/human-resources" routerLinkActive="active"
-                 ariaCurrentWhenActive="page">HR</a></li>
-        </ul>
-      </div>
+      <app-category-navigation-button></app-category-navigation-button>
     </div>
   </div>
 </div>

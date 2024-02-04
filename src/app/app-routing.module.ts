@@ -3,9 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { FoodComponent } from './pages/home/categories/food/food.component';
-import { HrComponent } from './pages/home/categories/hr/hr.component';
-import { TourismComponent } from './pages/home/categories/tourism/tourism.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MarketingComponent } from './pages/home/marketing/marketing.component';
 import { EventsComponent } from './pages/home/events/events.component';
@@ -20,8 +17,6 @@ const routes: Routes = [
     path: 'categories', loadChildren: () => import('../app/pages/home/categories/categories.module')
       .then(mod => mod.CategoriesModule)
   },
-  {path: 'human-resources', component: HrComponent},
-  {path: 'tourism', component: TourismComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'marketing', component: MarketingComponent},
   {path: 'events', component: EventsComponent},

@@ -7,25 +7,25 @@ import { Category } from "../shared/models/category";
   providedIn: 'root'
 })
 export class FirebaseService {
-  categoriesRef: AngularFireList<Category>;
-  categoriesUrl = '/categories';
+  productsRef: AngularFireList<Category>;
+  productsUrl = '/products';
 
 
   constructor(private database: AngularFireDatabase) {
-    this.categoriesRef = database.list(this.categoriesUrl);
+    this.productsRef = database.list(this.productsUrl);
   }
 
 
-  createCategory(value: any) {
-    this.categoriesRef.push(value);
+  createProduct(value: any) {
+    this.productsRef.push(value);
   }
 
-  getCategories() {
-    return this.categoriesRef;
+  getProducts() {
+    return this.productsRef;
   }
 
-  getCategoriesList(): Observable<any[]> {
-    return this.getCategories().snapshotChanges().pipe(
+  getProductsList(): Observable<any[]> {
+    return this.getProducts().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({key: c.payload.key, ...c.payload.val()})
@@ -34,11 +34,11 @@ export class FirebaseService {
     );
   }
 
-  updateCategory(key: string, value: any) {
-    return this.categoriesRef.update(key, value);
+  updateProduct(key: string, value: any) {
+    return this.productsRef.update(key, value);
   }
 
-  deleteCategory(key: string): Promise<any> {
-    return this.categoriesRef.remove(key);
+  deleteProduct(key: string): Promise<any> {
+    return this.productsRef.remove(key);
   }
 }

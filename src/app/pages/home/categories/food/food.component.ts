@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Category, SubCategory } from "../../../../shared/models/category";
 import { FirebaseService } from "../../../../services/firebase.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+// @ts-ignore
+import c from '../../../../../assets/categories.json';
 
 @Component({
   selector: 'app-food',
@@ -11,41 +12,54 @@ import { ActivatedRoute } from "@angular/router";
 })
 
 export class FoodComponent implements OnInit {
-  category!: Category;
-  categoryForm!: FormGroup;
+  category!: Category | undefined;
+  subCategory: SubCategory | undefined;
+  categories: Category[] = c;
+  productForm: FormGroup;
+  showSubCategories = false;
+  constructor(private fb: FormBuilder, private firebase: FirebaseService) {
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      image: ['Test', Validators.required],
+      description: ['Test', Validators.required],
+      categoryName: ['', Validators.required]
+    })
 
-  constructor(private firebaseService: FirebaseService, private fb: FormBuilder, private route: ActivatedRoute) {
+
   }
 
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(snapshot => {
-      const id = snapshot.get('id');
-      if (id) {
-        this.firebaseService.getCategoriesList().subscribe((categories: Category[]) => {
-          const category = categories.find(x => x.key === id);
-          if (category) {
-            this.category = category;
-            console.log(this.category);
-          }
-        })
+    this.category = this.categories.find(x=> x.name === 'Food');
+  }
+
+  addProduct() {
+    if(this.productForm.valid){
+      const productBody = {
+        ...this.productForm.value
       }
-    })
-    this.categoryForm = this.fb.group({
-      name: ['', [Validators.required]],
-      subcategory: ['', [Validators.required]]
-    })
+      this.firebase.createProduct(this.productForm.value);
+    }else {
+      console.log('Not Valid');
+    }
   }
 
-
-  addCategory() {
-    this.firebaseService.createCategory({name: 'Food', subCategories: []})
+  selectedSubCategory($event: Event) {
+    // @ts-ignore
+    this.productForm.addControl('categoryName_1', new FormControl($event.target.value))
   }
 
-  updateCategory() {
-    this.firebaseService.updateCategory(this.category.key, {
-      subCategories: [{name: 'Apples', subCategories: [{name: 'Green', subCategories: [{name: 'Resensko'}]}]}]
+  categoryChanges($event: Event) {
+    // @ts-ignore
+    const categorySelected = $event.target.value;
+    this.showSubCategories = false;
+    this.productForm.patchValue({
+      categoryName: categorySelected
     })
-  }
+      this.subCategory = this.category?.subCategories.find(y=> categorySelected === y.name)
 
+      if(this.subCategory && this.subCategory.subCategories && this.subCategory.subCategories.length > 0){
+        this.showSubCategories = true;
+      }
+  }
 }

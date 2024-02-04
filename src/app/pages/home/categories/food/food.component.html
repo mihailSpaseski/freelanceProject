@@ -1,73 +1,83 @@
 <h1 style="align-items: center; text-align: center;">Food</h1>
 
 <div class="container mt-2 mb-5">
-    <div class="row">
-        <div class="col-3">
-            <div class="dropdown me-2">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Categories
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" routerLink="/food" routerLinkActive="active"
-                            ariaCurrentWhenActive="page">Food</a></li>
-
-                    <li><a class="dropdown-item" routerLink="/tourism" routerLinkActive="active"
-                            ariaCurrentWhenActive="page">Tourism</a></li>
-
-                    <li><a class="dropdown-item" routerLink="/human-resources" routerLinkActive="active"
-                            ariaCurrentWhenActive="page">HR</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-8">
-            <ul>
-                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    Create New
-                </button>
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <label for="default input example" class="form-label">Example textarea</label>
-                                <input class="form-control" type="text" placeholder="Default input"
-                                    aria-label="default input example">
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" (click)="addCategory()">Save
-                                    changes</button>
-                                <button type="button" class="btn btn-primary" (click)="updateCategory()">Update
-                                    changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-
-            <div class="col-8">
-                <ul>
-                    <div class="card">
-                        <div class="card-header">
-                            Card Title:
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Apple Name:</h5>
-                            <p class="card-text"></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-3">
+      <app-category-navigation-button></app-category-navigation-button>
     </div>
+    <div class="col-8">
+      <ul>
+        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+          Create New
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="productForm">
+                  <label for="default input example" class="form-label">Name</label>
+                  <input class="form-control" type="text" placeholder="Default input"
+                         aria-label="default input example" formControlName="name">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                      </div>
+                      <select class="custom-select" id="inputGroupSelect01" (change)="categoryChanges($event)">
+                        <option selected>Choose...</option>
+                        <ng-container *ngFor="let subCategory of category?.subCategories">
+                          <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+
+                  <ng-container *ngIf="showSubCategories">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                      </div>
+                      <select class="custom-select" id="inputGroupSelect02" (change)="selectedSubCategory($event)">
+                        <option selected>Choose...</option>
+                        <ng-container *ngFor="let subCategory of subCategory?.subCategories">
+                          <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </ng-container>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addProduct()">Save
+                  changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+
+      <div class="col-8">
+        <ul>
+          <div class="card">
+            <div class="card-header">
+              Card Title:
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Apple Name:</h5>
+              <p class="card-text"></p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

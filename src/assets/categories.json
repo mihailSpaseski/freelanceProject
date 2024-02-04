@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Food",
+    "subCategories": [
+      {
+        "name": "Agriculture & Food Processing Machinery & Equipment"
+      },
+      {
+        "name": "Canned"
+      },
+      {
+        "name": "Drinks",
+        "subCategories": [
+          {
+            "name": "Alcoholic Beverages"
+          },
+          {
+            "name": "Juice"
+          },
+          {
+            "name": "Water"
+          }
+        ]
+      },
+      {
+        "name": "Farm Inputs: Fertilizers & Pesticides"
+      },
+      {
+        "name": "Fresh Fruit"
+      },
+      {
+        "name": "Fresh Vegetables"
+      },
+      {
+        "name": "Fresh: Meat, Fish & Seafood"
+      },
+      {
+        "name": "Fruit & Vegetables For Processing And Canning Industry"
+      },
+      {
+        "name": "Homemade"
+      },
+      {
+        "name": "Organic"
+      },
+      {
+        "name" : "Processed Food & Beverages Products"
+      },
+      {
+        "name": "Seeds"
+      }
+    ],
+    "routerLink": "/categories/food"
+  },
+  {
+    "name": "Human Resources",
+    "routerLink": "/categories/human-resources"
+  },
+  {
+    "name": "Tourism",
+    "routerLink": "/categories/tourism"
+  }
+]

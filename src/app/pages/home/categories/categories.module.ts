@@ -5,9 +5,13 @@ import { FoodComponent } from "./food/food.component";
 import { HrComponent } from "./hr/hr.component";
 import { TourismComponent } from "./tourism/tourism.component";
 import { RouterLink, RouterLinkActive, RouterModule, Routes } from "@angular/router";
+import { SharedModule } from "../../../shared/shared.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
-  {path: 'food/:id', component: FoodComponent}
+  {path: 'food', component: FoodComponent},
+  {path: 'human-resources', component: HrComponent},
+  {path: 'tourism', component: TourismComponent}
 ];
 
 @NgModule({
@@ -21,7 +25,9 @@ const routes: Routes = [
     CommonModule,
     RouterLinkActive,
     RouterLink,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports: [
     CreateProductFormComponent,

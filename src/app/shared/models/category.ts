@@ -1,11 +1,10 @@
 export interface Category{
-  key: string;
   name: string;
   subCategories: SubCategory[];
+  routerLink: string;
 }
 
 export interface SubCategory {
   name: string;
-  role: number;
   subCategories: SubCategory[];
 }
