@@ -7,36 +7,33 @@
     </div>
     <div class="col-8">
       <ul>
-        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Create New
         </button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create new Food post</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <form [formGroup]="productForm">
                   <label for="default input example" class="form-label">Name</label>
-                  <input class="form-control" type="text" placeholder="Default input"
-                         aria-label="default input example" formControlName="name">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                      </div>
-                      <select class="custom-select" id="inputGroupSelect01" (change)="categoryChanges($event)">
-                        <option selected>Choose...</option>
-                        <ng-container *ngFor="let subCategory of category?.subCategories">
-                          <option [value]="subCategory?.name">{{subCategory?.name}}</option>
-                        </ng-container>
-                      </select>
+                  <input class="form-control" type="text" placeholder="Default input" aria-label="default input example"
+                    formControlName="name">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Options</label>
                     </div>
+                    <select class="custom-select" id="inputGroupSelect01" (change)="categoryChanges($event)">
+                      <option selected>Choose...</option>
+                      <ng-container *ngFor="let subCategory of category?.subCategories">
+                        <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
 
                   <ng-container *ngIf="showSubCategories">
                     <div class="input-group mb-3">
@@ -65,18 +62,25 @@
       </ul>
 
       <div class="col-8">
-        <ul>
-          <div class="card">
+        <ng-container *ngFor="let others of someOther; let i=index">
+
+          <div class="card mt-2 mb-3">
             <div class="card-header">
-              Card Title:
+              <h4>{{others.categoryName}}</h4> 
             </div>
             <div class="card-body">
-              <h5 class="card-title">Apple Name:</h5>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">
+                {{others.name}}
+              </h5>
+              <p class="card-text">
+              </p>
+              <a class="btn btn-primary">Go somewhere</a>
+              <!-- <button type="button" class="btn btn-primary" (click)="getAllFoods()">GetFood</button> -->
             </div>
           </div>
-        </ul>
+
+        </ng-container>
+
       </div>
     </div>
   </div>

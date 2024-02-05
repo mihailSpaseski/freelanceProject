@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Category, SubCategory } from "../../../../shared/models/category";
+import { Category, DisplayItems, SubCategory } from "../../../../shared/models/category";
 import { FirebaseService } from "../../../../services/firebase.service";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 // @ts-ignore
 import c from '../../../../../assets/categories.json';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-food',
@@ -12,12 +14,20 @@ import c from '../../../../../assets/categories.json';
 })
 
 export class FoodComponent implements OnInit {
+
   category!: Category | undefined;
   subCategory: SubCategory | undefined;
   categories: Category[] = c;
   productForm: FormGroup;
   showSubCategories = false;
-  constructor(private fb: FormBuilder, private firebase: FirebaseService) {
+  items?: Observable<DisplayItems[]>;
+
+  someOther: any
+
+  constructor(private fb: FormBuilder,
+    private firebase: FirebaseService,
+    private afDatabase: AngularFireDatabase) {
+
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       image: ['Test', Validators.required],
@@ -25,21 +35,42 @@ export class FoodComponent implements OnInit {
       categoryName: ['', Validators.required]
     })
 
-
   }
-
 
   ngOnInit(): void {
-    this.category = this.categories.find(x=> x.name === 'Food');
+    this.category = this.categories.find(x => x.name === 'Food');
+
+    this.firebase.getProductsList().subscribe(x => this.someOther = x)
+
+    console.log(this.someOther)
+
   }
 
+
+  // getAllFoods() {
+  //   this.firebase.getProductsList().subscribe(allFoods => {
+  //     this.someOther = allFoods
+
+  //     for (let i = 0; i < this.someOther.length; i++) {
+
+  //       this.items?.categoryName = this.someOther[i].categoryName
+
+  //       console.log (this.someOther[i].key, this.someOther[i].categoryName);
+  //     }
+
+  //     // this.items = this.someOther[0]
+  //     // console.log(this.items?.categoryName)
+  //   })
+  // }
+
+
   addProduct() {
-    if(this.productForm.valid){
+    if (this.productForm.valid) {
       const productBody = {
         ...this.productForm.value
       }
       this.firebase.createProduct(this.productForm.value);
-    }else {
+    } else {
       console.log('Not Valid');
     }
   }
@@ -56,10 +87,32 @@ export class FoodComponent implements OnInit {
     this.productForm.patchValue({
       categoryName: categorySelected
     })
-      this.subCategory = this.category?.subCategories.find(y=> categorySelected === y.name)
+    this.subCategory = this.category?.subCategories.find(y => categorySelected === y.name)
 
-      if(this.subCategory && this.subCategory.subCategories && this.subCategory.subCategories.length > 0){
-        this.showSubCategories = true;
-      }
+    if (this.subCategory && this.subCategory.subCategories && this.subCategory.subCategories.length > 0) {
+      this.showSubCategories = true;
+    }
   }
 }
+
+
+
+// this.afDatabase.object('products/').valueChanges().subscribe(action => {
+
+//   this.someOther = action
+
+
+//   console.log(this.someOther)
+
+
+// })
+
+
+
+// console.log(
+//   this.afDatabase.list('products/').valueChanges().subscribe(items =>
+//     {
+//       console.log(items)
+//     }
+//   )
+// )

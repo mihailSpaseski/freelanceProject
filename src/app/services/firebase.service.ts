@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/compat/database";
 import { Category } from "../shared/models/category";
+import { productsModel } from '../shared/models/proudctsModel';
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +25,15 @@ export class FirebaseService {
     return this.productsRef;
   }
 
-  getProductsList(): Observable<any[]> {
+  getProductsList(): Observable<productsModel[]> {
     return this.getProducts().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({key: c.payload.key, ...c.payload.val()})
+        map(changes =>
+            changes.map(c =>
+                ({key: c.payload.key, ...c.payload.val()})
+            )
         )
-      )
     );
-  }
+}
 
   updateProduct(key: string, value: any) {
     return this.productsRef.update(key, value);
