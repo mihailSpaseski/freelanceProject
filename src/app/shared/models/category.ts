@@ -9,10 +9,3 @@ export interface SubCategory {
   subCategories: SubCategory[];
 }
 
-export interface DisplayItems {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  categoryName: string;
-}

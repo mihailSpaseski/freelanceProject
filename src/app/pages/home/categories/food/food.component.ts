@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Category, DisplayItems, SubCategory } from "../../../../shared/models/category";
+import { Category, SubCategory } from "../../../../shared/models/category";
 import { FirebaseService } from "../../../../services/firebase.service";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 // @ts-ignore
 import c from '../../../../../assets/categories.json';
 import { Observable } from 'rxjs';
+import { Product } from "../../../../shared/models/proudctsModel";
 
 @Component({
   selector: 'app-food',
@@ -20,9 +21,7 @@ export class FoodComponent implements OnInit {
   categories: Category[] = c;
   productForm: FormGroup;
   showSubCategories = false;
-  items?: Observable<DisplayItems[]>;
-
-  someOther: any
+  items!: Product[];
 
   constructor(private fb: FormBuilder,
     private firebase: FirebaseService,
@@ -40,9 +39,10 @@ export class FoodComponent implements OnInit {
   ngOnInit(): void {
     this.category = this.categories.find(x => x.name === 'Food');
 
-    this.firebase.getProductsList().subscribe(x => this.someOther = x)
-
-    console.log(this.someOther)
+    this.firebase.getProductsList().subscribe(x => {
+      this.items = x;
+      console.log(this.items);
+    })
 
   }
 

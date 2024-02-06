@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/compat/database";
 import { Category } from "../shared/models/category";
-import { productsModel } from '../shared/models/proudctsModel';
+import { Product } from '../shared/models/proudctsModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  productsRef: AngularFireList<Category>;
+  productsRef: AngularFireList<Product>;
   productsUrl = '/products';
 
 
@@ -25,13 +25,14 @@ export class FirebaseService {
     return this.productsRef;
   }
 
-  getProductsList(): Observable<productsModel[]> {
+  getProductsList(): Observable<Product[]> {
+    // @ts-ignore
     return this.getProducts().snapshotChanges().pipe(
-        map(changes =>
-            changes.map(c =>
-                ({key: c.payload.key, ...c.payload.val()})
-            )
+      map(changes =>
+        changes.map(c =>
+          ({key: c.payload.key, ...c.payload.val()})
         )
+      )
     );
 }
 

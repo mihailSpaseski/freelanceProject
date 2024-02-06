@@ -62,20 +62,19 @@
       </ul>
 
       <div class="col-8">
-        <ng-container *ngFor="let others of someOther; let i=index">
+        <ng-container *ngFor="let item of items; let i=index">
 
           <div class="card mt-2 mb-3">
             <div class="card-header">
-              <h4>{{others.categoryName}}</h4> 
+              <h4>{{item.categoryName}}</h4>
             </div>
             <div class="card-body">
               <h5 class="card-title">
-                {{others.name}}
+                {{item.name}}
               </h5>
               <p class="card-text">
               </p>
               <a class="btn btn-primary">Go somewhere</a>
-              <!-- <button type="button" class="btn btn-primary" (click)="getAllFoods()">GetFood</button> -->
             </div>
           </div>
 
