@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 // @ts-ignore
 import c from '../../../../../assets/categories.json';
-import { Observable } from 'rxjs';
 import { Product } from "../../../../shared/models/proudctsModel";
 
 @Component({
@@ -30,7 +29,7 @@ export class FoodComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       image: ['Test', Validators.required],
-      description: ['Test', Validators.required],
+      description: ['', Validators.required],
       categoryName: ['', Validators.required]
     })
 
@@ -45,23 +44,6 @@ export class FoodComponent implements OnInit {
     })
 
   }
-
-
-  // getAllFoods() {
-  //   this.firebase.getProductsList().subscribe(allFoods => {
-  //     this.someOther = allFoods
-
-  //     for (let i = 0; i < this.someOther.length; i++) {
-
-  //       this.items?.categoryName = this.someOther[i].categoryName
-
-  //       console.log (this.someOther[i].key, this.someOther[i].categoryName);
-  //     }
-
-  //     // this.items = this.someOther[0]
-  //     // console.log(this.items?.categoryName)
-  //   })
-  // }
 
 
   addProduct() {
@@ -93,26 +75,5 @@ export class FoodComponent implements OnInit {
       this.showSubCategories = true;
     }
   }
+
 }
-
-
-
-// this.afDatabase.object('products/').valueChanges().subscribe(action => {
-
-//   this.someOther = action
-
-
-//   console.log(this.someOther)
-
-
-// })
-
-
-
-// console.log(
-//   this.afDatabase.list('products/').valueChanges().subscribe(items =>
-//     {
-//       console.log(items)
-//     }
-//   )
-// )

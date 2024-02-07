@@ -11,34 +11,44 @@
         <div class="float-sm-right collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="/marketing" routerLinkActive="active"
-                        ariaCurrentWhenActive="page">Marketing</a>
+
+                    <button class="btn btn-outline" aria-current="page" routerLink="/marketing"
+                        routerLinkActive="active" ariaCurrentWhenActive="page">Marketing</button>
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="/events" routerLinkActive="active"
-                        ariaCurrentWhenActive="page">Events</a>
+
+                    <button class="btn btn-outline" aria-current="page" routerLink="/events" routerLinkActive="active"
+                        ariaCurrentWhenActive="page">Events</button>
+
                 </li>
-                
+
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="/news" routerLinkActive="active"
-                        ariaCurrentWhenActive="page">News</a>
+
+                    <button class="btn btn-outline" aria-current="page" routerLink="/news" routerLinkActive="active"
+                        ariaCurrentWhenActive="page">News</button>
+
                 </li>
                 <li *ngIf="!(afAuth.user | async)" class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="/login"
-                        routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+
+                    <button class="btn btn-outline" aria-current="page" routerLink="/login" routerLinkActive="active"
+                        ariaCurrentWhenActive="page">Login</button>
+
                 </li>
                 <li *ngIf="(afAuth.user | async) as user" class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="/my_profile"
-                        routerLinkActive="active" ariaCurrentWhenActive="page">{{user.email}}</a>
+
+                    <button class="btn btn-outline" aria-current="page" routerLink="/my_profile"
+                        routerLinkActive="active" ariaCurrentWhenActive="page">{{user.email}}</button>
+
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        English
-                    </a>
+
+                    <button class="btn btn-outline dropdown-toggle" id="navbarDropdown" role="button"
+                        aria-current="page" data-bs-toggle="dropdown" aria-expanded="false">English</button>
+
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Македонски</a></li>
-                        <li><a class="dropdown-item" href="#">Српски</a></li>
+                        <li><a class="dropdown-item">Македонски</a></li>
+                        <li><a class="dropdown-item">Српски</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

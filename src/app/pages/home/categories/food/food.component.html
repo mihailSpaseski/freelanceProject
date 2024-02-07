@@ -20,39 +20,52 @@
               </div>
               <div class="modal-body">
                 <form [formGroup]="productForm">
-                  <label for="default input example" class="form-label">Name</label>
-                  <input class="form-control" type="text" placeholder="Default input" aria-label="default input example"
-                    formControlName="name">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                    </div>
-                    <select class="custom-select" id="inputGroupSelect01" (change)="categoryChanges($event)">
-                      <option selected>Choose...</option>
-                      <ng-container *ngFor="let subCategory of category?.subCategories">
-                        <option [value]="subCategory?.name">{{subCategory?.name}}</option>
-                      </ng-container>
-                    </select>
-                  </div>
+                  <label for="name of product" class="form-label">Enter the name of the product</label>
+                  <input class="form-control mb-3 mt-2" type="text" placeholder="Name of product"
+                    aria-label="name of product" formControlName="name">
 
-                  <ng-container *ngIf="showSubCategories">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect02">Options</label>
-                      </div>
-                      <select class="custom-select" id="inputGroupSelect02" (change)="selectedSubCategory($event)">
+                  <label for="description of product" class="form-label">Enter the description of the product</label>
+                  <textarea class="form-control mb-3 mt-2" type="text" placeholder="Description of product"
+                    aria-label="description of product" formControlName="description"></textarea>
+                  <div class="input-group mb-3" style="display: block;">
+                    <div class="input-group-prepend">
+
+                    </div>
+
+                    <label for="inputGroupSelect01" class="form-label">Choose the category of your product</label>
+                    <div>
+                      <select class="form-select mb-3 mt-2" id="inputGroupSelect01" (change)="categoryChanges($event)">
                         <option selected>Choose...</option>
-                        <ng-container *ngFor="let subCategory of subCategory?.subCategories">
+                        <ng-container *ngFor="let subCategory of category?.subCategories">
                           <option [value]="subCategory?.name">{{subCategory?.name}}</option>
                         </ng-container>
                       </select>
+                    </div>
+                  </div>
+
+                  <ng-container *ngIf="showSubCategories" class="container mt-2 mb-3">
+                    <div class="input-group mb-3" style="display: block;">
+                      <div class="input-group-prepend">
+                        <label for="inputGroupSelect02" class="form-label">Choose the sub-category of your
+                          product</label>
+
+                      </div>
+
+                      <div>
+                        <select class="form-select" id="inputGroupSelect02" (change)="selectedSubCategory($event)">
+                          <option selected>Choose...</option>
+                          <ng-container *ngFor="let subCategory of subCategory?.subCategories">
+                            <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                          </ng-container>
+                        </select>
+                      </div>
                     </div>
                   </ng-container>
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="addProduct()">Save
+                <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">Save
                   changes
                 </button>
               </div>
@@ -66,15 +79,28 @@
 
           <div class="card mt-2 mb-3">
             <div class="card-header">
-              <h4>{{item.categoryName}}</h4>
+              <p class="fs-2">{{item.categoryName}}</p>
+              <!-- <p *ngIf="item.categoryName"></p> -->
             </div>
             <div class="card-body">
-              <h5 class="card-title">
+              <p class="card-title fs-2">
                 {{item.name}}
-              </h5>
-              <p class="card-text">
               </p>
-              <a class="btn btn-primary">Go somewhere</a>
+              <div>
+
+                <p class="card-text fs-6">
+                  {{item.description}}
+                </p>
+
+              </div>
+              <div>
+                <img src="../../../../../assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
+              </div>
+
+              <div class="d-grid gap-2 mx-auto">
+                <button class="btn btn-primary" type="button">View Location</button>
+              </div>
+
             </div>
           </div>
 
