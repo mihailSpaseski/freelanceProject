@@ -1,6 +1,6 @@
 <div class="container mt-2 mb-5">
     <div class="row">
-        <p class="text-center fs-1 mb-3 mt-2">Welcome</p>
+        <p class="text-center fs-1 mb-3 mt-2">Welcome Добредојдовте</p>
         <div class="col-3">
             <app-category-navigation-button></app-category-navigation-button>
         </div>
@@ -11,8 +11,45 @@
             </form>
         </div>
 
-        <app-news></app-news>
+    </div>
 
+    <div class="row">
 
+        <div class="col-2 p-3">
+            <app-news></app-news>
+        </div>
+
+        <div class="col-6 p-3 mt-2 mx-auto d-block">
+            <ng-container *ngFor="let item of items.slice().reverse()">
+
+                <div class="card mt-2 mb-3">
+                    <div class="card-header">
+                        <p class="fs-2">{{item.categoryName}}</p>
+                        <!-- <p *ngIf="item.categoryName"></p> -->
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title fs-2">
+                            {{item.name}}
+                        </p>
+                        <div>
+
+                            <p class="card-text fs-6">
+                                {{item.description}}
+                            </p>
+
+                        </div>
+                        <div>
+                            <img src="/assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
+                        </div>
+
+                        <div class="d-grid gap-2 mx-auto">
+                            <button class="btn btn-primary" type="button">View Location</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </ng-container>
+        </div>
     </div>
 </div>

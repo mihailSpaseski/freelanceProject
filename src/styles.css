@@ -1,0 +1,41 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+.div,
+p,
+h1,
+h2,
+h3,
+input,
+label {
+    font-family: 'assets/BebasNeueCyrillicRegular/BebasNeueCyrillicRegular.ttf';
+}
+
+.btn {
+    font-family: 'assets/BebasNeueCyrillicRegular/BebasNeueCyrillicRegular.ttf';
+}
+
+
+.btn-primary {
+    background-color: #247EAF;
+}
+
+.btn-secondary {
+    background-color: black;
+}
+
+.btn-outline:hover {
+    background-color: lightgrey;
+}
+
+.btn-outline-success:hover {
+    background-color: #FFFC01;
+    border-color: #FFFC01;
+    color: #247EAF;
+}
+
+
+/* 
+#FB2E01 - crvena
+#FFFC01 - zolta 
+#247EAF - sina 
+*/
