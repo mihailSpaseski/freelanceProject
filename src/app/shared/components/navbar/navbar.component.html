@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg" style="background-color: #0E4360;">
     <div class="container">
-        <div class="me-auto">
+        <div class="me-auto ms-3">
             <a class="navbar-brand" routerLink="/home">
-                <img src="/assets/BalkanOn_1.png" class="w-25 img-fluid" alt="">
+                <img src="/assets/BalkanOn_White_2.png" class="w-25 img-fluid" alt="">
             </a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -15,38 +15,38 @@
                 <li class="nav-item">
 
                     <button class="btn btn-outline" aria-current="page" routerLink="/marketing"
-                        routerLinkActive="active" ariaCurrentWhenActive="page">Marketing</button>
+                        routerLinkActive="active" ariaCurrentWhenActive="page" style="color: white;">MARKETING</button>
 
                 </li>
                 <li class="nav-item">
 
                     <button class="btn btn-outline" aria-current="page" routerLink="/events" routerLinkActive="active"
-                        ariaCurrentWhenActive="page">Events</button>
+                        ariaCurrentWhenActive="page" style="color: white; font-weight: 700;">EVENTS</button>
 
                 </li>
 
                 <li class="nav-item">
 
                     <button class="btn btn-outline" aria-current="page" routerLink="/news" routerLinkActive="active"
-                        ariaCurrentWhenActive="page">News</button>
+                        ariaCurrentWhenActive="page" style="color: white; font-weight: 700;">NEWS</button>
 
                 </li>
                 <li *ngIf="!(afAuth.user | async)" class="nav-item">
 
                     <button class="btn btn-outline" aria-current="page" routerLink="/login" routerLinkActive="active"
-                        ariaCurrentWhenActive="page">Login</button>
+                        ariaCurrentWhenActive="page" style="color: white; font-weight: 700;">LOGIN</button>
 
                 </li>
                 <li *ngIf="(afAuth.user | async) as user" class="nav-item">
 
                     <button class="btn btn-outline" aria-current="page" routerLink="/my_profile"
-                        routerLinkActive="active" ariaCurrentWhenActive="page">{{user.email}}</button>
+                        routerLinkActive="active" ariaCurrentWhenActive="page" style="color: white; font-weight: 700;">{{user.email}}</button>
 
                 </li>
                 <li class="nav-item dropdown">
 
                     <button class="btn btn-outline dropdown-toggle" id="navbarDropdown" role="button"
-                        aria-current="page" data-bs-toggle="dropdown" aria-expanded="false">English</button>
+                        aria-current="page" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; font-weight: 700;">ENGLISH</button>
 
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item">Македонски</a></li>

@@ -1,22 +1,62 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('assets/Dancing_Script/DancingScript-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue Cyrillic';
+    src: url('assets/BebasNeueCyrillicRegular/BebasNeueCyrillicRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gustatory';
+    src: url('assets/gustatory-delight-font/GustatoryDelightRegular.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+
 .div,
 p,
 h1,
 h2,
 h3,
-input,
-label {
-    font-family: 'assets/BebasNeueCyrillicRegular/BebasNeueCyrillicRegular.ttf';
+h4,
+h5,
+input {
+    /* font-family: 'assets/BrothertonFreeFont/BrothertonFreeFont.ttf'; */
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    font-family: sans-serif;
+
+    color: black;
+    font-weight: bold;
+}
+
+.label {
+    color: #0E4360;
 }
 
 .btn {
-    font-family: 'assets/BebasNeueCyrillicRegular/BebasNeueCyrillicRegular.ttf';
+    /* font-family: 'assets/BrothertonFreeFont/BrothertonFreeFont.ttf'; */
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 
 .btn-primary {
-    background-color: #247EAF;
+    background-color: #0E4360;
+    border-color: #0E4360;
 }
 
 .btn-secondary {
@@ -27,15 +67,26 @@ label {
     background-color: lightgrey;
 }
 
+.btn-outline {
+    color: #0E4360;
+}
+
 .btn-outline-success:hover {
     background-color: #FFFC01;
     border-color: #FFFC01;
-    color: #247EAF;
+    color: #0E4360;
 }
+
+.me-6 {
+    margin-right: 5rem;
+}
+
+
 
 
 /* 
 #FB2E01 - crvena
 #FFFC01 - zolta 
 #247EAF - sina 
+#0E4360 - sina temna
 */

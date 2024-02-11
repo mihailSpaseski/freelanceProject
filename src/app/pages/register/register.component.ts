@@ -38,18 +38,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // async function logDataFromApi() {
-    //   try {
-    //     const response = await fetch('https://restcountries.com/v3.1/all');
-    //     const data = await response.json();
-    //     const countries = data.map((item: any) => item.name.common);
-    //     console.log(countries)
-    //   } catch (error) {
-    //     console.error('Error fetching data from API:', error);
-    //   }
-    // }
-    // logDataFromApi(); 
-
   }
 
 

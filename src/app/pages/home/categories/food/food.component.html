@@ -1,114 +1,180 @@
-<h1 style="align-items: center; text-align: center;">Food</h1>
-
-<div class="container mt-2 mb-5">
-  <div class="row">
-    <div class="col-3">
-      <app-category-navigation-button></app-category-navigation-button>
+<div class="row mt-5 mb-3">
+  <div class="col fs-5" style="text-align: end;">
+    <div>
+      <p class="md-3 fs-5 fw-bold" style="color: #0E4360; text-align: center;">Food Categories</p>
     </div>
-    <div class="col-8">
-      <ul>
-        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Create New
-        </button>
 
-        <!-- kopche za kategorii sortiranje -->
+    <!-- separator -->
+    <div class="w-100 mt-3 mb-3"></div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Create new Food post</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form [formGroup]="productForm">
-                  <label for="name of product" class="form-label">Enter the name of the product</label>
-                  <input class="form-control mb-3 mt-2" type="text" placeholder="Name of product"
-                    aria-label="name of product" formControlName="name">
+    <div>
+      <button class="btn btn-outline" style="color: #247EAF; margin-right: 10rem;">Agriculture</button>
+    </div>
 
-                  <label for="description of product" class="form-label">Enter the description of the product</label>
-                  <textarea class="form-control mb-3 mt-2" type="text" placeholder="Description of product"
-                    aria-label="description of product" formControlName="description"></textarea>
-                  <div class="input-group mb-3" style="display: block;">
-                    <div class="input-group-prepend">
+    <!-- separator -->
+    <div class="w-100 mt-3 mb-3"></div>
 
-                    </div>
+    <div>
+      <button class="btn btn-outline" style="color: #247EAF; margin-right: 10rem;">Food Categories</button>
+    </div>
 
-                    <label for="inputGroupSelect01" class="form-label">Choose the category of your product</label>
-                    <div>
-                      <select class="form-select mb-3 mt-2" id="inputGroupSelect01" (change)="categoryChanges($event)">
-                        <option selected>Choose...</option>
-                        <ng-container *ngFor="let subCategory of category?.subCategories">
-                          <option [value]="subCategory?.name">{{subCategory?.name}}</option>
-                        </ng-container>
-                      </select>
-                    </div>
-                  </div>
+    <!-- separator -->
+    <div class="w-100 mt-3 mb-3"></div>
 
-                  <ng-container *ngIf="showSubCategories" class="container mt-2 mb-3">
-                    <div class="input-group mb-3" style="display: block;">
-                      <div class="input-group-prepend">
-                        <label for="inputGroupSelect02" class="form-label">Choose the sub-category of your
-                          product</label>
+    <div>
+      <button class="btn btn-outline" style="color: #247EAF; margin-right: 10rem;">Food Categories</button>
+    </div>
 
-                      </div>
+  </div>
 
-                      <div>
-                        <select class="form-select" id="inputGroupSelect02" (change)="selectedSubCategory($event)">
-                          <option selected>Choose...</option>
-                          <ng-container *ngFor="let subCategory of subCategory?.subCategories">
-                            <option [value]="subCategory?.name">{{subCategory?.name}}</option>
-                          </ng-container>
-                        </select>
-                      </div>
-                    </div>
-                  </ng-container>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">Save
-                  changes
-                </button>
-              </div>
-            </div>
-          </div>
+
+  <div class="col">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search for anything" aria-label="Search">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+
+    <!-- separator -->
+    <div class="w-100"></div>
+
+    <ng-container *ngFor="let item of items?.reverse()">
+
+      <div class="card mt-2 mb-3">
+        <div class="card-header pt-2 mb-0 pb-0">
+          <p class="fs-6 mt-2" style="align-items: center; text-align: center;">{{item.categoryName}}</p>
         </div>
-      </ul>
+        <div class="card-body">
+          <p class="card-title fs-1">
+            {{item.name}}
+          </p>
+          <div>
 
-      <div class="col-8">
-        <ng-container *ngFor="let item of items.slice().reverse()">
+            <p class="card-text fs-6 fw-light">
+              {{item.description}}
+            </p>
 
-          <div class="card mt-2 mb-3">
-            <div class="card-header">
-              <p class="fs-2">{{item.categoryName}}</p>
-              <!-- <p *ngIf="item.categoryName"></p> -->
+          </div>
+          <div>
+            <img src="/assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
+          </div>
+
+          <div class="d-grid gap-2 mx-auto">
+            <button class="btn btn-primary" type="button">View Product</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="w-100"></div>
+    </ng-container>
+
+  </div>
+
+  <!-- separator -->
+  <!-- <div class="w-100"></div> -->
+
+  <div class="col">
+
+    <button type="button" class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle"
+        viewBox="0 0 17 17">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+        <path
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+      </svg>
+    </button>
+
+    <!-- separator -->
+    <div class="w-100"></div>
+
+    <div class="center">
+      <div style="text-align: end;">
+        <p class="fs-5">Promoted</p>
+        <p class="fs-5">Title</p>
+        <p style="font-weight: 200;" class="fs-6">Description....</p>
+        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+      </div>
+    </div>
+
+    <div class="center">
+      <div style="text-align: end;">
+        <p class="fs-5">Promoted</p>
+        <p class="fs-5">Title</p>
+        <p style="font-weight: 200;" class="fs-6">Description....</p>
+        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+      </div>
+    </div>
+
+    <div class="center">
+      <div style="text-align: end;">
+        <p class="fs-5">Promoted</p>
+        <p class="fs-5">Title</p>
+        <p style="font-weight: 200;" class="fs-6">Description....</p>
+        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL STARTS HERE  -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create new Food post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productForm">
+          <label for="name of product" class="form-label">Enter the name of the product</label>
+          <input class="form-control mb-3 mt-2" type="text" placeholder="Name of product" aria-label="name of product"
+            formControlName="name">
+
+          <label for="description of product" class="form-label">Enter the description of the product</label>
+          <textarea class="form-control mb-3 mt-2" type="text" placeholder="Description of product"
+            aria-label="description of product" formControlName="description"></textarea>
+          <div class="input-group mb-3" style="display: block;">
+            <div class="input-group-prepend">
+
             </div>
-            <div class="card-body">
-              <p class="card-title fs-2">
-                {{item.name}}
-              </p>
-              <div>
 
-                <p class="card-text fs-6">
-                  {{item.description}}
-                </p>
-
-              </div>
-              <div>
-                <img src="/assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
-              </div>
-
-              <div class="d-grid gap-2 mx-auto">
-                <button class="btn btn-primary" style="background-color: #247EAF; color: white; border-color: white;"
-                  type="button">View Location</button>
-              </div>
-
+            <label for="inputGroupSelect01" class="form-label">Choose the category of your product</label>
+            <div>
+              <select class="form-select mb-3 mt-2" id="inputGroupSelect01" (change)="categoryChanges($event)">
+                <option selected>Choose...</option>
+                <ng-container *ngFor="let subCategory of category?.subCategories">
+                  <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                </ng-container>
+              </select>
             </div>
           </div>
 
-        </ng-container>
+          <ng-container *ngIf="showSubCategories" class="container mt-2 mb-3">
+            <div class="input-group mb-3" style="display: block;">
+              <div class="input-group-prepend">
+                <label for="inputGroupSelect02" class="form-label">Choose the sub-category of your
+                  product</label>
 
+              </div>
+
+              <div>
+                <select class="form-select" id="inputGroupSelect02" (change)="selectedSubCategory($event)">
+                  <option selected>Choose...</option>
+                  <ng-container *ngFor="let subCategory of subCategory?.subCategories">
+                    <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </ng-container>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">Save
+          changes
+        </button>
       </div>
     </div>
   </div>

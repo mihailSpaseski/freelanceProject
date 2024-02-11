@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
     this.firebase.getProductsList().subscribe(x => {
       this.items = x;
-      console.log(this.items);
+      // console.log(this.items);
     })
   }
 
