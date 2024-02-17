@@ -1,31 +1,33 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 @font-face {
-    font-family: 'Dancing Script';
-    src: url('assets/Dancing_Script/DancingScript-VariableFont_wght.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Dancing Script";
+  src: url("assets/Dancing_Script/DancingScript-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Bebas Neue Cyrillic';
-    src: url('assets/BebasNeueCyrillicRegular/BebasNeueCyrillicRegular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Bebas Neue Cyrillic";
+  src: url("assets/BebasNeueCyrillicRegular/BebasNeueCyrillicRegular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Gustatory';
-    src: url('assets/gustatory-delight-font/GustatoryDelightRegular.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
+  font-family: "Gustatory";
+  src: url("assets/gustatory-delight-font/GustatoryDelightRegular.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: normal;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
 
 .div,
 p,
@@ -34,55 +36,82 @@ h2,
 h3,
 h4,
 h5,
-input {
-    /* font-family: 'assets/BrothertonFreeFont/BrothertonFreeFont.ttf'; */
-    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
-    font-family: sans-serif;
-
-    color: black;
-    font-weight: bold;
+input,
+label {
+  /* font-family: 'assets/BrothertonFreeFont/BrothertonFreeFont.ttf'; */
+  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+  font-family: sans-serif;
+  /* color: black; */
+  color: #0e4360;
+  font-weight: bold;
 }
 
-.label {
-    color: #0E4360;
+.balkanDarkBlue {
+  color: #0e4360 !important;
+}
+
+.foodCategoriesPositioning {
+  margin-right: 10rem;
+}
+
+.logoLightBlue {
+  color: #247eaf !important;
 }
 
 .btn {
-    /* font-family: 'assets/BrothertonFreeFont/BrothertonFreeFont.ttf'; */
-    font-family: sans-serif;
-    font-weight: bold;
+  /* font-family: 'assets/BrothertonFreeFont/BrothertonFreeFont.ttf'; */
+  font-family: sans-serif;
+  font-weight: bold;
 }
 
-
 .btn-primary {
-    background-color: #0E4360;
-    border-color: #0E4360;
+  font-family: sans-serif;
+  background-color: #0e4360;
+  border-color: #0e4360;
 }
 
 .btn-secondary {
-    background-color: black;
+  font-family: sans-serif;
+  background-color: black;
 }
 
 .btn-outline:hover {
-    background-color: lightgrey;
+  font-family: sans-serif;
+  background-color: lightgrey;
 }
 
 .btn-outline {
-    color: #0E4360;
+  font-family: sans-serif;
+  color: #0e4360;
 }
 
 .btn-outline-success:hover {
-    background-color: #FFFC01;
-    border-color: #FFFC01;
-    color: #0E4360;
+  background-color: #fffc01;
+  border-color: #fffc01;
+  color: #0e4360;
 }
 
 .me-6 {
-    margin-right: 5rem;
+  margin-right: 5rem;
 }
 
+.form-check-input{
+  background-color: #0E4360;
+  border-color: #0E4360;
+}
 
+.form-check-input:hover {
+  background-color: #247EAF;
+}
 
+.form-check-input:active{
+  background-color: #0E4360;
+}
+
+.form-check-input:checked{
+  background-color: #247EAF;
+  
+}
 
 /* 
 #FB2E01 - crvena

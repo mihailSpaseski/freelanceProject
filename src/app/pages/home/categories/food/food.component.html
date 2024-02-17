@@ -1,79 +1,207 @@
 <div class="row mt-5 mb-3">
-  <div class="col fs-5" style="text-align: end;">
+  <div class="col fs-5" style="text-align: end">
     <div>
-      <p class="md-3 fs-5 fw-bold" style="color: #0E4360; text-align: center;">Food Categories</p>
+      <p class="md-3 fs-5 fw-bold balkanDarkBlue foodCategoriesPositioning">Food Categories</p>
     </div>
 
     <!-- separator -->
-    <div class="w-100 mt-3 mb-3"></div>
+    <div class="w-100 mt-1 mb-1"></div>
 
-    <div>
-      <button class="btn btn-outline" style="color: #247EAF; margin-right: 10rem;">Agriculture</button>
-    </div>
+    <div class="btn-group-vertical align-items-end" role="group" aria-label="Sorting Buttons">
+      <div>
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter1" autocomplete="off" #filter1
+          value="Agriculture & Food Processing Machinery & Equipment" (click)="filterButtons(filter1.value)">
 
-    <!-- separator -->
-    <div class="w-100 mt-3 mb-3"></div>
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter1"
+          style="text-align: end;">Agriculture & Food Processing Machinery & Equipment</label>
 
-    <div>
-      <button class="btn btn-outline" style="color: #247EAF; margin-right: 10rem;">Food Categories</button>
-    </div>
+      </div>
 
-    <!-- separator -->
-    <div class="w-100 mt-3 mb-3"></div>
+      <div class="w-100 mt-1 mb-1"></div>
 
-    <div>
-      <button class="btn btn-outline" style="color: #247EAF; margin-right: 10rem;">Food Categories</button>
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter2" autocomplete="off" #filter2 value="Canned"
+          (click)="filterButtons(filter2.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter2"
+          style="text-align: end;">Canned</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter3" autocomplete="off" #filter3 value="Drinks"
+          (click)="filterButtons(filter3.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter3"
+          style="text-align: end;">Drinks</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter4" autocomplete="off" #filter4
+          value="Farm Inputs: Fertilizers & Pesticides" (click)="filterButtons(filter4.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter4"
+          style="text-align: end;">Farm Inputs: Fertilizers & Pesticides</label>
+
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter5" autocomplete="off" #filter5
+          value="Fresh Fruit" (click)="filterButtons(filter5.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter5"
+          style="text-align: end;">Fresh Fruit</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter6" autocomplete="off" #filter6
+          value="Fresh Vegetables" (click)="filterButtons(filter6.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter6"
+          style="text-align: end;">Fresh Vegetables</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter7" autocomplete="off" #vFilter7
+          value="Fresh: Meat, Fish & Seafood" (click)="filterButtons(vFilter7.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter7"
+          style="text-align: end;">Fresh: Meat, Fish & Seafood</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="filter8" autocomplete="off" #filter8
+          value="Fruit & Vegetables For Processing And Canning Industry" (click)="filterButtons(filter8.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter8"
+          style="text-align: end;">Fruit & Vegetables For Processing And Canning Industry</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="filter9" autocomplete="off" #filter9
+          value="Homemade" (click)="filterButtons(filter9.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter9"
+          style="text-align: end;">Homemade</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="filter10" autocomplete="off" #filter10
+          value="Organic" (click)="filterButtons(filter10.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter10"
+          style="text-align: end;">Organic</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="filter11" autocomplete="off" #filter11
+          value="Processed Food & Beverages Products" (click)="filterButtons(filter11.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter11"
+          style="text-align: end;">Processed Food & Beverages Products</label>
+
+      </div>
+
+      <div class="w-100 mt-1 mb-1"></div>
+
+      <div>
+
+        <input type="radio" class="btn-check" name="vbtnFilter" id="filter12" autocomplete="off" #filter12 value="Seeds"
+          (click)="filterButtons(filter12.value)">
+
+        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter12"
+          style="text-align: end;">Seeds</label>
+
+      </div>
     </div>
 
   </div>
 
-
-  <div class="col">
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search for anything" aria-label="Search">
-      <button class="btn btn-primary" type="submit">Search</button>
+  <div class="col mb-3">
+    <form class="d-flex">
+      <input class="form-control me-2" placeholder="Search for anything" aria-label="Search" #filter>
+      <button class="btn btn-primary" type="button" (click)="filterResults(filter.value)">Search</button>
     </form>
 
     <!-- separator -->
     <div class="w-100"></div>
 
-    <ng-container *ngFor="let item of items?.reverse()">
 
-      <div class="card mt-2 mb-3">
-        <div class="card-header pt-2 mb-0 pb-0">
-          <p class="fs-6 mt-2" style="align-items: center; text-align: center;">{{item.categoryName}}</p>
-        </div>
-        <div class="card-body">
-          <p class="card-title fs-1">
-            {{item.name}}
-          </p>
-          <div>
+    <div *ngIf="filteredItems.length == 0">
+      <p class="align-items-center mt-5">
+        There are no products at the moment, please try again later...
+      </p>
+    </div>
 
-            <p class="card-text fs-6 fw-light">
-              {{item.description}}
+    <div *ngIf="filteredItems">
+      <ng-container *ngFor="let product of filteredItems?.slice()?.reverse()" [itemFiltered]!="itemFiltered">
+        <div class="card mt-2 mb-3">
+          <div class="card-header pt-2 mb-0 pb-0">
+            <p class="fs-6 mt-2" style="align-items: center; text-align: center">
+              {{ product.categoryName }}
             </p>
-
           </div>
-          <div>
-            <img src="/assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
-          </div>
+          <div class="card-body">
+            <p class="card-title fs-1">
+              {{ product.name }}
+            </p>
+            <div>
+              <p class="card-text fs-6 fw-light">
+                {{ product.description }}
+              </p>
+            </div>
+            <div>
+              <img src="/assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
+            </div>
 
-          <div class="d-grid gap-2 mx-auto">
-            <button class="btn btn-primary" type="button">View Product</button>
+            <div class="d-grid gap-2 mx-auto">
+              <button class="btn btn-primary" type="button">View Product</button>
+            </div>
           </div>
-
         </div>
-      </div>
-      <div class="w-100"></div>
-    </ng-container>
+        <div class="w-100"></div>
+      </ng-container>
+    </div>
 
   </div>
 
-  <!-- separator -->
-  <!-- <div class="w-100"></div> -->
-
   <div class="col">
-
     <button type="button" class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle"
         viewBox="0 0 17 17">
@@ -87,32 +215,31 @@
     <div class="w-100"></div>
 
     <div class="center">
-      <div style="text-align: end;">
+      <div style="text-align: end">
         <p class="fs-5">Promoted</p>
         <p class="fs-5">Title</p>
-        <p style="font-weight: 200;" class="fs-6">Description....</p>
-        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+        <p style="font-weight: 200" class="fs-6">Description....</p>
+        <img class="img-fluid mb-3 mt-2" src="/assets/300.png" />
       </div>
     </div>
 
     <div class="center">
-      <div style="text-align: end;">
+      <div style="text-align: end">
         <p class="fs-5">Promoted</p>
         <p class="fs-5">Title</p>
-        <p style="font-weight: 200;" class="fs-6">Description....</p>
-        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+        <p style="font-weight: 200" class="fs-6">Description....</p>
+        <img class="img-fluid mb-3 mt-2" src="/assets/300.png" />
       </div>
     </div>
 
     <div class="center">
-      <div style="text-align: end;">
+      <div style="text-align: end">
         <p class="fs-5">Promoted</p>
         <p class="fs-5">Title</p>
-        <p style="font-weight: 200;" class="fs-6">Description....</p>
-        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+        <p style="font-weight: 200" class="fs-6">Description....</p>
+        <img class="img-fluid mb-3 mt-2" src="/assets/300.png" />
       </div>
     </div>
-
   </div>
 </div>
 
@@ -122,47 +249,49 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Create new Food post</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Create new Food post
+        </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="productForm">
           <label for="name of product" class="form-label">Enter the name of the product</label>
           <input class="form-control mb-3 mt-2" type="text" placeholder="Name of product" aria-label="name of product"
-            formControlName="name">
+            formControlName="name" />
 
           <label for="description of product" class="form-label">Enter the description of the product</label>
           <textarea class="form-control mb-3 mt-2" type="text" placeholder="Description of product"
             aria-label="description of product" formControlName="description"></textarea>
-          <div class="input-group mb-3" style="display: block;">
-            <div class="input-group-prepend">
-
-            </div>
+          <div class="input-group mb-3" style="display: block">
+            <div class="input-group-prepend"></div>
 
             <label for="inputGroupSelect01" class="form-label">Choose the category of your product</label>
             <div>
               <select class="form-select mb-3 mt-2" id="inputGroupSelect01" (change)="categoryChanges($event)">
                 <option selected>Choose...</option>
                 <ng-container *ngFor="let subCategory of category?.subCategories">
-                  <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                  <option [value]="subCategory?.name">
+                    {{ subCategory?.name }}
+                  </option>
                 </ng-container>
               </select>
             </div>
           </div>
 
           <ng-container *ngIf="showSubCategories" class="container mt-2 mb-3">
-            <div class="input-group mb-3" style="display: block;">
+            <div class="input-group mb-3" style="display: block">
               <div class="input-group-prepend">
-                <label for="inputGroupSelect02" class="form-label">Choose the sub-category of your
-                  product</label>
-
+                <label for="inputGroupSelect02" class="form-label">Choose the sub-category of your product</label>
               </div>
 
               <div>
                 <select class="form-select" id="inputGroupSelect02" (change)="selectedSubCategory($event)">
                   <option selected>Choose...</option>
                   <ng-container *ngFor="let subCategory of subCategory?.subCategories">
-                    <option [value]="subCategory?.name">{{subCategory?.name}}</option>
+                    <option [value]="subCategory?.name">
+                      {{ subCategory?.name }}
+                    </option>
                   </ng-container>
                 </select>
               </div>
@@ -171,9 +300,11 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">Save
-          changes
+        <button type="button" class="btn btn-outline" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">
+          Save changes
         </button>
       </div>
     </div>

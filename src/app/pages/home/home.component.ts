@@ -12,23 +12,10 @@ import c from '../../../assets/categories.json';
 })
 export class HomeComponent implements OnInit {
 
-  category!: Category | undefined;
-  categories: Category[] = c;
-  items!: Product[];
-
-  constructor(private firebase: FirebaseService,) {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.category = this.categories.find(x => x.name === 'Food');
 
-    this.firebase.getProductsList().subscribe(x => {
-      this.items = x;
-      // console.log(this.items);
-    })
   }
-
-
 
 }

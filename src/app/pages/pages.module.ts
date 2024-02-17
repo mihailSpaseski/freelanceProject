@@ -13,8 +13,6 @@ import { NewsComponent } from "./home/news/news.component";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { SharedModule } from "../shared/shared.module";
 
-
-
 @NgModule({
   declarations: [
     HomeComponent,
@@ -24,7 +22,7 @@ import { SharedModule } from "../shared/shared.module";
     NotFoundComponent,
     EventsComponent,
     MarketingComponent,
-    NewsComponent
+    NewsComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +40,7 @@ import { SharedModule } from "../shared/shared.module";
      NotFoundComponent,
      EventsComponent,
      MarketingComponent,
-     NewsComponent
+     NewsComponent,
    ]
 })
 export class PagesModule { }

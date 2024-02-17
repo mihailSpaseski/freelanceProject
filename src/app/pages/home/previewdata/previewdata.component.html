@@ -1,0 +1,35 @@
+<div *ngIf="!items">
+    <p>
+        There is no available data at the moment.
+    </p>
+</div>
+
+<div *ngIf="items">
+    <ng-container *ngFor="let product of filteredItems?.slice()?.reverse()" [itemFiltered]!="itemFiltered">
+        <div class="card mt-2 mb-3">
+            <div class="card-header pt-2 mb-0 pb-0">
+                <p class="fs-6 mt-2" style="align-items: center; text-align: center">
+                    {{ product.categoryName }}
+                </p>
+            </div>
+            <div class="card-body">
+                <p class="card-title fs-1">
+                    {{ product.name }}
+                </p>
+                <div>
+                    <p class="card-text fs-6 fw-light">
+                        {{ product.description }}
+                    </p>
+                </div>
+                <div>
+                    <img src="/assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
+                </div>
+
+                <div class="d-grid gap-2 mx-auto">
+                    <button class="btn btn-primary" type="button">View Product</button>
+                </div>
+            </div>
+        </div>
+        <div class="w-100"></div>
+    </ng-container>
+</div>

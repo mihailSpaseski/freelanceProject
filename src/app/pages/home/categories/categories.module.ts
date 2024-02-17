@@ -7,6 +7,8 @@ import { TourismComponent } from "./tourism/tourism.component";
 import { RouterLink, RouterLinkActive, RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "../../../shared/shared.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ViewdetailsComponent } from './viewdetails/viewdetails.component';
+import { PreviewdataComponent } from '../previewdata/previewdata.component';
 
 const routes: Routes = [
   {path: 'food', component: FoodComponent},
@@ -19,7 +21,9 @@ const routes: Routes = [
     CreateProductFormComponent,
     FoodComponent,
     HrComponent,
-    TourismComponent
+    TourismComponent,
+    ViewdetailsComponent,
+    PreviewdataComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +37,8 @@ const routes: Routes = [
     CreateProductFormComponent,
     FoodComponent,
     HrComponent,
-    TourismComponent
+    TourismComponent,
+    PreviewdataComponent
   ]
 })
 export class CategoriesModule {
