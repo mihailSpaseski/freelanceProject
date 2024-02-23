@@ -1,1 +1,40 @@
-<app-navbar></app-navbar>
+<div class="container">
+
+  <button class="btn btn-primary mt-3" [routerLink]="['../']">Back</button>
+
+  <div class="row">
+    <div class="col-md-8 mt-3">
+      <div *ngIf="product">
+        <div class="card mt-2 mb-3">
+          <div class="card-header pt-2 mb-0 pb-0">
+            <p class="fs-6 mt-2" style="align-items: center; text-align: center">
+              {{ product.categoryName }}
+            </p>
+          </div>
+          <div class="card-body">
+            <p class="card-title fs-1">
+              {{ product.name }}
+            </p>
+            <div>
+              <p class="card-text fs-6 fw-light">
+                {{ product.description }}
+              </p>
+            </div>
+            <div>
+              <img [src]="product.image" class="img-fluid rounded mx-auto d-block mt-2 mb-3" width="400" height="150"
+                alt="">
+            </div>
+
+            <!-- <div class="d-grid gap-2 mx-auto">
+                <button class="btn btn-primary" type="button" [routerLink]="['/details', product.key]">View
+                  Product</button>
+              </div> -->
+          </div>
+        </div>
+        <div class="w-100"></div>
+      </div>
+
+    </div>
+    <div class="col-md-4 mt-3"></div>
+  </div>
+</div>

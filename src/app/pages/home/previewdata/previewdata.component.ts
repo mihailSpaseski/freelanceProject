@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/proudctsModel';
@@ -10,12 +10,13 @@ import c from 'src/assets/categories.json';
   templateUrl: './previewdata.component.html',
   styleUrls: ['./previewdata.component.css'],
 })
-export class PreviewdataComponent implements OnInit{
+export class PreviewdataComponent implements OnInit {
+  status: boolean = false;
 
   category!: Category | undefined;
   categories: Category[] = c;
   items!: Product[];
-  filteredItems: Product[] = [];
+  @Input() filteredItems: Product[] = [];
 
   constructor(private firebase: FirebaseService) {}
 
@@ -24,7 +25,6 @@ export class PreviewdataComponent implements OnInit{
 
     this.firebase.getProductsList().subscribe((x) => {
       this.items = x;
-      // console.log(this.items);
       this.filteredItems = this.items;
     });
   }
@@ -38,5 +38,9 @@ export class PreviewdataComponent implements OnInit{
     this.filteredItems = this.items.filter((itemFiltered) =>
       itemFiltered?.name.toLowerCase().includes(text.toLowerCase())
     );
+  }
+
+  readMore() {
+    this.status = !this.status;
   }
 }

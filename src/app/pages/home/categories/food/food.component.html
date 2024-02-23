@@ -1,203 +1,35 @@
 <div class="row mt-5 mb-3">
-  <div class="col fs-5" style="text-align: end">
-    <div>
-      <p class="md-3 fs-5 fw-bold balkanDarkBlue foodCategoriesPositioning">Food Categories</p>
-    </div>
+  <div class="col fs-5">
+    <div style="display: flex; justify-content: end;">
 
+      <p class="fs-5 fw-bold balkanDarkBlue" style="margin-right: 1rem; margin-top: 1rem; overflow-anchor: none">Food
+        Categories</p>
+      <button class="btn btn-outline" style="margin-right: 3rem;" value="" #filter1
+        (click)="filterButtons(filter1.value)">Clear filter</button>
+
+    </div>
     <!-- separator -->
     <div class="w-100 mt-1 mb-1"></div>
 
     <div class="btn-group-vertical align-items-end" role="group" aria-label="Sorting Buttons">
-      <div>
-        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter1" autocomplete="off" #filter1
-          value="Agriculture & Food Processing Machinery & Equipment" (click)="filterButtons(filter1.value)">
 
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter1"
-          style="text-align: end;">Agriculture & Food Processing Machinery & Equipment</label>
+      <ng-container *ngFor="let item of category?.subCategories;let i=index">
+        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter{{i}}" autocomplete="off" #filter1
+          value="{{item.name}}" (click)="filterButtons(filter1.value)">
 
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter2" autocomplete="off" #filter2 value="Canned"
-          (click)="filterButtons(filter2.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter2"
-          style="text-align: end;">Canned</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter3" autocomplete="off" #filter3 value="Drinks"
-          (click)="filterButtons(filter3.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter3"
-          style="text-align: end;">Drinks</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter4" autocomplete="off" #filter4
-          value="Farm Inputs: Fertilizers & Pesticides" (click)="filterButtons(filter4.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter4"
-          style="text-align: end;">Farm Inputs: Fertilizers & Pesticides</label>
+        <div style="padding-right: 10rem;">
+          <label class="btn btn-outline logoLightBlue" for="vFilter{{i}}" style="text-align: end">{{item.name}}</label>
+        </div>
 
 
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter5" autocomplete="off" #filter5
-          value="Fresh Fruit" (click)="filterButtons(filter5.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter5"
-          style="text-align: end;">Fresh Fruit</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter6" autocomplete="off" #filter6
-          value="Fresh Vegetables" (click)="filterButtons(filter6.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter6"
-          style="text-align: end;">Fresh Vegetables</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="vFilter7" autocomplete="off" #vFilter7
-          value="Fresh: Meat, Fish & Seafood" (click)="filterButtons(vFilter7.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="vFilter7"
-          style="text-align: end;">Fresh: Meat, Fish & Seafood</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="filter8" autocomplete="off" #filter8
-          value="Fruit & Vegetables For Processing And Canning Industry" (click)="filterButtons(filter8.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter8"
-          style="text-align: end;">Fruit & Vegetables For Processing And Canning Industry</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="filter9" autocomplete="off" #filter9
-          value="Homemade" (click)="filterButtons(filter9.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter9"
-          style="text-align: end;">Homemade</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="filter10" autocomplete="off" #filter10
-          value="Organic" (click)="filterButtons(filter10.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter10"
-          style="text-align: end;">Organic</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="filter11" autocomplete="off" #filter11
-          value="Processed Food & Beverages Products" (click)="filterButtons(filter11.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter11"
-          style="text-align: end;">Processed Food & Beverages Products</label>
-
-      </div>
-
-      <div class="w-100 mt-1 mb-1"></div>
-
-      <div>
-
-        <input type="radio" class="btn-check" name="vbtnFilter" id="filter12" autocomplete="off" #filter12 value="Seeds"
-          (click)="filterButtons(filter12.value)">
-
-        <label class="btn btn-outline logoLightBlue foodCategoriesPositioning" for="filter12"
-          style="text-align: end;">Seeds</label>
-
-      </div>
+        <div class="w-100 mt-1 mb-1"></div>
+      </ng-container>
     </div>
-
   </div>
 
   <div class="col mb-3">
-    <form class="d-flex">
-      <input class="form-control me-2" placeholder="Search for anything" aria-label="Search" #filter>
-      <button class="btn btn-primary" type="button" (click)="filterResults(filter.value)">Search</button>
-    </form>
 
-    <!-- separator -->
-    <div class="w-100"></div>
-
-
-    <div *ngIf="filteredItems.length == 0">
-      <p class="align-items-center mt-5">
-        There are no products at the moment, please try again later...
-      </p>
-    </div>
-
-    <div *ngIf="filteredItems">
-      <ng-container *ngFor="let product of filteredItems?.slice()?.reverse()" [itemFiltered]!="itemFiltered">
-        <div class="card mt-2 mb-3">
-          <div class="card-header pt-2 mb-0 pb-0">
-            <p class="fs-6 mt-2" style="align-items: center; text-align: center">
-              {{ product.categoryName }}
-            </p>
-          </div>
-          <div class="card-body">
-            <p class="card-title fs-1">
-              {{ product.name }}
-            </p>
-            <div>
-              <p class="card-text fs-6 fw-light">
-                {{ product.description }}
-              </p>
-            </div>
-            <div>
-              <img src="/assets/300.png" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
-            </div>
-
-            <div class="d-grid gap-2 mx-auto">
-              <button class="btn btn-primary" type="button">View Product</button>
-            </div>
-          </div>
-        </div>
-        <div class="w-100"></div>
-      </ng-container>
-    </div>
+    <app-previewdata [filteredItems]="filteredItems"></app-previewdata>
 
   </div>
 
@@ -244,7 +76,6 @@
 </div>
 
 <!-- MODAL STARTS HERE  -->
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -263,6 +94,11 @@
           <label for="description of product" class="form-label">Enter the description of the product</label>
           <textarea class="form-control mb-3 mt-2" type="text" placeholder="Description of product"
             aria-label="description of product" formControlName="description"></textarea>
+          <div class="input-group mb-3">
+            <input type="file" accept="image/*,.pdf" class="form-control" id="inputGroupFile02"
+              (input)="fileSelected($event)">
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+          </div>
           <div class="input-group mb-3" style="display: block">
             <div class="input-group-prepend"></div>
 
@@ -303,7 +139,8 @@
         <button type="button" class="btn btn-outline" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-primary" [disabled]="!productForm.valid" (click)="addProduct()"
+          data-bs-dismiss="modal">
           Save changes
         </button>
       </div>

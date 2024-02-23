@@ -13,7 +13,8 @@ import { PreviewdataComponent } from '../previewdata/previewdata.component';
 const routes: Routes = [
   {path: 'food', component: FoodComponent},
   {path: 'human-resources', component: HrComponent},
-  {path: 'tourism', component: TourismComponent}
+  {path: 'tourism', component: TourismComponent},
+  {path: 'food/:id', component: ViewdetailsComponent}
 ];
 
 @NgModule({

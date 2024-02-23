@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { finalize, map, Observable } from 'rxjs';
 import {
   AngularFireDatabase,
   AngularFireList,
 } from '@angular/fire/compat/database';
+import {
+  AngularFireStorage,
+} from '@angular/fire/compat/storage';
 import { Product } from '../shared/models/proudctsModel';
 import { User } from '../shared/models/users';
+import { FileUpload } from '../shared/models/fileUpload';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +18,7 @@ export class FirebaseService {
   productsRef: AngularFireList<Product>;
   productsUrl = '/products';
   usersUrl = '/users';
+  private basePath = '/uploads';
 
   // userbyid = firebase.database().ref('/users');
   // userbyid = firebase.ref('/users');
@@ -21,7 +26,7 @@ export class FirebaseService {
   usersRef: AngularFireList<any>;
   // userUrl = '/users';
 
-  constructor(private database: AngularFireDatabase) {
+  constructor(private database: AngularFireDatabase,  private storage: AngularFireStorage) {
     this.productsRef = database.list(this.productsUrl);
     this.usersRef = database.list(this.usersUrl);
   }
@@ -82,4 +87,23 @@ export class FirebaseService {
   deleteProduct(key: string): Promise<any> {
     return this.productsRef.remove(key);
   }
+
+  pushFileToStorage(fileUpload: FileUpload, product: any): Observable<number | undefined> {
+    console.log(fileUpload);
+  const filePath = `${this.basePath}/${fileUpload.name}`;
+  const storageRef = this.storage.ref(filePath);
+  const uploadTask = this.storage.upload(filePath, fileUpload);
+
+  uploadTask.snapshotChanges().pipe(
+    finalize(() => {
+      storageRef.getDownloadURL().subscribe(downloadURL => {
+        product.image = downloadURL;
+        console.log('here');
+        this.createProduct(product);
+      });
+    })
+  ).subscribe();
+
+  return uploadTask.percentageChanges();
+}
 }

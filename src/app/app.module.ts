@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environment/environment';
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 import { PagesModule } from "./pages/pages.module";
@@ -22,6 +23,7 @@ import { SharedModule } from "./shared/shared.module";
     AngularFireAuthModule,
     FormsModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     PagesModule,
     SharedModule,
   ],

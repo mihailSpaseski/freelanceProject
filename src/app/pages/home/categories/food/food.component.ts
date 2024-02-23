@@ -26,6 +26,8 @@ export class FoodComponent implements OnInit {
   showSubCategories = false;
   items!: Product[];
   filteredItems: Product[] = [];
+  image: any;
+  uploadProgress!: number;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +36,7 @@ export class FoodComponent implements OnInit {
   ) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
-      image: ['Test', Validators.required],
+      image: ['', Validators.required],
       description: ['', Validators.required],
       categoryName: ['', Validators.required],
     });
@@ -48,15 +50,21 @@ export class FoodComponent implements OnInit {
       this.filteredItems = this.items;
       // console.log(this.items);
     });
-    
+  }
+
+  public fileSelected($event: any) {
+    this.image = $event.target.files.item(0);
   }
 
   addProduct() {
     if (this.productForm.valid) {
-      const productBody = {
-        ...this.productForm.value,
-      };
-      this.firebase.createProduct(this.productForm.value);
+      this.firebase
+        .pushFileToStorage(this.image, this.productForm.value)
+        .subscribe((result) => {
+          if (result) {
+            this.uploadProgress = result;
+          }
+        });
     } else {
       window.alert('Not Valid');
       console.log('Not Valid');
@@ -103,7 +111,7 @@ export class FoodComponent implements OnInit {
   }
 
   filterButtons(text: string) {
-    
+    console.log(text);
     if (!text) {
       this.filteredItems = this.items;
       return;
@@ -112,6 +120,10 @@ export class FoodComponent implements OnInit {
     this.filteredItems = this.items.filter((itemFiltered) =>
       itemFiltered?.categoryName.toLowerCase().includes(text.toLowerCase())
     );
+    // console.log(this.filteredItems);
   }
 
+  clearFilter() {
+    this.filteredItems = this.items;
+  }
 }
