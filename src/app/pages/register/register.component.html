@@ -1,327 +1,179 @@
-<div class="container-fluid">
+<div class="container-fluid mt-2">
+    <h2 class="text-center">What type of account do you want to create:</h2>
+    <div class="d-flex justify-content-center mt-3">
+        <!-- <button class="btn btn-primary me-3" (click)="showUserCard()">User account</button>
+        <button class="btn btn-primary" (click)="showCompanyCard()">Company account</button> -->
 
-    <div class="row mt-3">
-        <div class="col-sm-6">
+        <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
+        <label class="btn btn-outline-primary me-3" for="success-outlined" (click)="showUserCard()">User account</label>
 
-            <h1 class="text-center">User Account</h1>
-
-            <div class="card" [formGroup]="registerForm">
-                <div class="card-body text-center">
-                    <form [formGroup]="registerForm">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email:</label>
-                            <input formControlName="username" type="email" id="email" class="form-control" required
-                                placeholder="Enter Username or Email">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="phoneNumber" class="form-label">Phone Number:</label>
-                            <input formControlName="phoneNumber" type="number" id="phoneNumber" class="form-control"
-                                required placeholder="07x xxx xxx">
-                        </div>
+        <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+        <label class="btn btn-outline-primary" for="danger-outlined" (click)="showCompanyCard()">Company account</label>
 
 
-                        <label for="password" class="form-label">Password:</label>
 
-                        <div class="input-group mb-3">
-                            <input [type]="fieldTextType ? 'text' : 'password'" class="form-control"
-                                formControlName="password" required placeholder="Enter your password" />
-                                <span class="input-group-text" id="basic-addon2">
-                                    <i class="bi" 
-                                    [ngClass]="{
-                                        'bi-eye': !fieldTextType,
-                                        'bi-eye-slash': fieldTextType
-                                    }"
-                                    (click)="toggleFieldTextType()"></i>
-                                </span>
-                        </div>
+    </div>
+    <div class="text-center mt-4">
+        <div *ngIf="userSelected" class="card">
+            <div class="container mt-4 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <form [formGroup]="registerForm" class="border p-4 rounded shadow">
+                            <h3 class="mb-4 text-center">Create User Account:</h3>
 
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Confirm Password:</label>
-                            <input formControlName="confirmPassword" type="password" id="confirmPassword"
-                                [type]="fieldTextType ? 'text' : 'password'" class="form-control" required
-                                placeholder="Enter your password" />
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input formControlName="username" type="email" id="email" class="form-control" required
+                                    placeholder="Enter Username or Email">
+                            </div>
 
-                        </div>
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label">Phone Number:</label>
+                                <input formControlName="phoneNumber" type="number" id="phoneNumber" class="form-control"
+                                    required placeholder="07x xxx xxx">
+                            </div>
 
-                        <div *ngIf="registerForm?.errors?.['mismatch'] && registerForm?.touched">
-                            <p>Passwords do not match.</p>
-                        </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <div class="input-group">
+                                    <input [type]="fieldTextType ? 'text' : 'password'" class="form-control"
+                                        formControlName="password" required placeholder="Enter your password" />
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword"
+                                        (click)="toggleFieldTextType()">
+                                        <i class="bi" [ngClass]="{
+                                                        'bi-eye': !fieldTextType,
+                                                        'bi-eye-slash': fieldTextType
+                                                    }"></i>
+                                    </button>
+                                </div>
+                            </div>
 
-                        <div class="mb-3 text-center">
-                            <button (click)="registerWithEmailPassword()" [disabled]="registerForm.invalid"
-                                class="btn btn-primary">Create Account</button>
-                        </div>
-                        <div class="mb-3 text-center">
-                            <button type="submit" class="btn btn-link">Forgot Password</button>
-                        </div>
-                    </form>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirm Password:</label>
+                                <input formControlName="confirmPassword" type="password" id="confirmPassword"
+                                    [type]="fieldTextType ? 'text' : 'password'" class="form-control" required
+                                    placeholder="Enter your password" />
+                            </div>
+
+                            <div *ngIf="registerForm?.errors?.['mismatch'] && registerForm?.touched"
+                                class="alert alert-danger">
+                                Passwords do not match.
+                            </div>
+
+                            <div class="mb-3 text-center">
+                                <button (click)="registerWithEmailPassword()" [disabled]="registerForm.invalid"
+                                    class="btn btn-primary">Create Account</button>
+                            </div>
+                            <div class="mb-3 text-center">
+                                <button type="submit" class="btn btn-link">Forgot Password</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-
-            <h1 class="text-center">Company Account</h1>
+    </div>
 
 
-            <form [formGroup]="registrationForm" (ngSubmit)="submitForm()">
-                <div *ngIf="currentPage === 1">
-                    <h2>Choose your category:</h2>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="foodRadio" name="category" value="food"
-                            formControlName="category">
-                        <label class="form-check-label" for="foodRadio">Food</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="tourismRadio" name="category" value="tourism"
-                            formControlName="category">
-                        <label class="form-check-label" for="tourismRadio">Tourism</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="hrRadio" name="category" value="hr"
-                            formControlName="category">
-                        <label class="form-check-label" for="hrRadio">Human Resources</label>
-                    </div>
-                    <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
-                </div>
+    <div *ngIf="companySelected" class="card">
+        <div class="container mt-4 mb-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form [formGroup]="companyRegisterForm" (ngSubmit)="submitForm()" class="border p-4 rounded shadow">
 
-                <div *ngIf="currentPage === 2 && registrationForm.get('category')?.value === 'food'">
-                    <!-- Food Company Registration Fields -->
-                    <!-- Implement Company Name, Email, Password, Confirm Password, Buyer/Seller -->
-                </div>
-
-                <div *ngIf="currentPage === 2 && registrationForm.get('category')?.value === 'tourism'">
-                    <!-- Tourism Company Registration Fields -->
-                </div>
-
-                <div *ngIf="currentPage === 2 && registrationForm.get('category')?.value === 'hr'">
-                    <!-- Human Resources Company Registration Fields -->
-                </div>
-
-                <button type="button" class="btn btn-secondary" (click)="prevPage()">Previous</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
-
-
-            <!-- <div class="card">
-                <div class="card-body text-center">
-                    <form [formGroup]="companyRegisterForm">
-
-
-                        <h3 class="mb-3">Sign Up And Start Contacting Suppliers Today!</h3>
-
-                        <div id="carouselExampleIndicators" class="carousel slide">
-                            <div class="carousel-inner">
-                                <div class="ms-3 me-3">
-
-                                    <div class="carousel-item active">
-
-                                        <div>
-                                            <p class="fs-3">Choose your Company account:</p>
-                                        </div>
-
-                                        <div class="card d-flex align-items-center justify-content-center"
-                                            style="border: 0;">
-                                            <div class="card-body">
-                                                <div class="fs-3 mb-3 mt-2">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="chooseCompanyType" id="chooseCompanyType1" checked
-                                                            (change)="companyType = 1">
-                                                        <label class="form-check-label" for="chooseCompanyType1">
-                                                            Food
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="chooseCompanyType" id="chooseCompanyType2"
-                                                            (change)="companyType = 2">
-                                                        <label class="form-check-label" for="chooseCompanyType2">
-                                                            Tourism
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="chooseCompanyType" id="chooseCompanyType3"
-                                                            (change)="companyType = 3">
-                                                        <label class="form-check-label" for="chooseCompanyType3">
-                                                            HR
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div *ngIf="this.companyType === 1">
-                                            <div class="mb-3 text-center">
-                                                <button class="btn btn-primary" type="button"
-                                                    data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                                    aria-current="true" aria-label="Slide 1"> Next </button>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="this.companyType === 2">
-                                            <div class="mb-3 text-center">
-                                                <button class="btn btn-primary" type="button"
-                                                    data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                                    aria-current="true" aria-label="Slide 1"> Next </button>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="this.companyType === 3">
-                                            <div class="mb-3 text-center">
-                                                <button class="btn btn-primary" type="button"
-                                                    data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                                                    aria-current="true" aria-label="Slide 1"> Next </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="carousel-item">
-
-                                        <div class="mb-3">
-                                            <label for="companyName" class="form-label">Your Company Name:</label>
-                                            <input formControlName="companyName" type="text" id="companyName"
-                                                class="form-control" required placeholder="Enter Your Company Name">
-                                        </div>
-
-                                        <label class="form-label">Countries:</label>
-                                        <div class="input-group mb-3">
-
-                                            <select class="form-control" name="country" id="country">
-                                                <option value="" disabled selected>Select Country</option>
-                                                <option *ngFor="let country of countries" [value]="country.name">
-                                                    {{country.name}}</option>
-                                            </select>
-
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="mb-3 text-center">
-                                            <div class="form-check-inline">
-                                                <input class="form-check-input me-3" type="radio"
-                                                    name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    I am primarily a Buyer.
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <input class="form-check-input me-3" type="radio"
-                                                    name="flexRadioDefault" id="flexRadioDefault2">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    I am primarily a Seller.
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-3 text-center">
-                                            <button class="btn btn-outline me-3" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                                aria-current="true" aria-label="Slide 0"> Back </button>
-                                            <button class="btn btn-primary" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                                                aria-current="true" aria-label="Slide 1" (click)="printCountry()"> Next
-                                            </button>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="carousel-item">
-
-                                        <h2>Marketing</h2>
-
-                                        <div class="mb-3 text-center">
-                                            <button class="btn btn-outline me-3" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                                aria-current="true" aria-label="Slide 0"> Back </button>
-                                            <button class="btn btn-primary" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                                aria-current="true" aria-label="Slide 2"> Next </button>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="carousel-item">
-
-                                        <h2>HR</h2>
-
-                                        <div class="mb-3 text-center">
-                                            <button class="btn btn-outline me-3" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                                aria-current="true" aria-label="Slide 0"> Back </button>
-                                            <button class="btn btn-primary" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                                aria-current="true" aria-label="Slide 2"> Next </button>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="carousel-item">
-
-                                        <div class="mb-3">
-                                            <label for="fullName" class="form-label">Your Full Name:</label>
-                                            <input formControlName="fullName" type="text" id="fullName"
-                                                class="form-control" required placeholder="Enter Your Full Name">
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="emailAddress" class="form-label">Your Email Address:</label>
-                                            <input formControlName="emailAddress" type="email" id="emailAddress"
-                                                class="form-control" required placeholder="Enter Your Email Address">
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="phoneNumberWithAreaCode" class="form-label">Your Phone
-                                                Number:</label>
-                                            <input formControlName="phoneNumberWithAreaCode" type="tel"
-                                                id="phoneNumberWithAreaCode" class="form-control" required
-                                                placeholder="Enter Your Phone Number">
-                                        </div>
-
-                                        <div class="mb-3 text-center">
-                                            <button class="btn btn-outline me-3" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                                aria-current="true" aria-label="Slide 0"> Back </button>
-                                            <button class="btn btn-primary" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5"
-                                                aria-current="true" aria-label="Slide 2"> Next </button>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-
-                                        <div class="mb-3">
-                                            <label for="productWantToBuy" class="form-label">Product you want to
-                                                buy:</label>
-                                            <input formControlName="productWantToBuy" type="text" id="productWantToBuy"
-                                                class="form-control" required
-                                                placeholder="Enter a product you want to buy">
-                                        </div>
-
-
-                                        <div class="mb-3 text-center">
-                                            <button class="btn btn-outline me-3" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                                                aria-current="true" aria-label="Slide 1"> Back </button>
-
-                                            <button class="btn btn-primary" type="button"
-                                                [disabled]="companyRegisterForm.invalid"> Submit </button>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div *ngIf="currentPage === 1">
+                            <h3 class="mb-3 text-center">Create Company Account:</h3>
+                            <h6 class="mb-2">Select Category:</h6>
+                            <div class="mb-3 ">
+                                <input type="radio" class="btn-check" id="foodRadio" name="category" value="food"
+                                    formControlName="category">
+                                <label class="btn btn-outline-secondary d-grid" for="foodRadio">Food</label>
+                            </div>
+                            <div class="mb-3">
+                                <input type="radio" class="btn-check" id="marketingRadio" name="category"
+                                    value="marketing" formControlName="category">
+                                <label class="btn btn-outline-secondary d-grid" for="marketingRadio">Marketing</label>
+                            </div>
+                            <div class="mb-3">
+                                <input type="radio" class="btn-check" id="hrRadio" name="category" value="hr"
+                                    formControlName="category">
+                                <label class="btn btn-outline-secondary d-grid" for="hrRadio">Human
+                                    Resources</label>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
                             </div>
                         </div>
+
+                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'food'">
+                            <h3 class="mb-4 text-center">Food Registration</h3>
+                            <!-- Implement Company Name, Email, Password, Confirm Password, Buyer/Seller -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input formControlName="username" type="email" id="email" class="form-control" required
+                                    placeholder="Enter Email">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label">Phone Number:</label>
+                                <input formControlName="phoneNumber" type="number" id="phoneNumber" class="form-control"
+                                    required placeholder="07x xxx xxx">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
+                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'marketing'">
+                            <h2 class="mb-4 text-center">Marketing Company Registration Fields</h2>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
+                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
+                            </div>
+                        </div>
+
+                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'hr'">
+                            <h2 class="mb-4 text-center">Human Resources Company Registration Fields</h2>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
+                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- PAGE 3 -->
+
+                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'food'">
+                            <h2 class="mb-4 text-center">Food page 3</h2>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
+                            </div>
+                        </div>
+
+                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'marketing'">
+                            <h2 class="mb-4 text-center">Marketing page 3</h2>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
+                            </div>
+                        </div>
+
+                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'hr'">
+                            <h2 class="mb-4 text-center">HR page 3</h2>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

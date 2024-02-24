@@ -1,40 +1,38 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-</head>
+<div class="container-fluid">
+    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 80vh;">
 
-<div class="bg-light d-flex align-items-center justify-content-center" style="height: 80vh;">
+        <div class="card p-5" style="width: 400px;">
+            <h2 class="text-center mb-4">Login</h2>
 
+            <form [formGroup]="loginForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Username or Email:</label>
+                    <input formControlName="username" type="email" id="email" class="form-control" required
+                        placeholder="Enter Username or Email">
+                </div>
 
-    <div class="card p-5" style="width: 400px;">
-        <h2 class="text-center mb-4">Login</h2>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input formControlName="password" type="password" id="password" class="form-control" required
+                        placeholder="Enter your password">
+                </div>
 
-        <form [formGroup]="loginForm">
-            <div class="mb-3">
-                <label for="email" class="form-label">Username or Email:</label>
-                <input formControlName="username" type="email" id="email" class="form-control" required placeholder="Enter Username or Email">
+                <div class="mb-3 text-center">
+                    <button (click)="loginWithEmailPassword()" [disabled]="loginForm.invalid"
+                        class="btn btn-primary">Login</button>
+                </div>
+                <div class="mb-3 text-center">
+                    <button type="submit" class="btn btn-link">Forgot Password</button>
+                </div>
+            </form>
+
+            <div class="text-center">
+                <div>
+                    <p>Don't have an account yet?</p>
+                </div>
+                <button class="btn btn-link" routerLink="/register" routerLinkActive="active"
+                    ariaCurrentWhenActive="page">Sign Up</button>
             </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input formControlName="password" type="password" id="password" class="form-control" required placeholder="Enter your password">
-            </div>
-
-            <div class="mb-3 text-center">
-                <button (click)="loginWithEmailPassword()" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
-            </div>
-            <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-link">Forgot Password</button>
-            </div>
-        </form>
-
-        <div class="text-center">
-            <div>
-                <p>Don't have an account yet?</p>
-            </div>
-            <button class="btn btn-link" routerLink="/register" routerLinkActive="active"
-                ariaCurrentWhenActive="page">Sign Up</button>
         </div>
     </div>
 </div>

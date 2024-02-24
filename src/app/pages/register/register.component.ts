@@ -20,19 +20,29 @@ import { countries } from 'src/app/shared/country-data-store';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  // public : any = this.countries
-
   fieldTextType: boolean = false;
 
+  companyRegisterForm: FormGroup = new FormGroup({});
   currentPage: number = 1;
 
   public countries: any = countries;
   private selected: any;
 
+  userSelected: boolean = false;
+  companySelected: boolean = false;
+
   companyType: number = 1;
 
   hide: boolean = true;
   hideConfirmPassword: boolean = true;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthenticationService,
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private firebase: FirebaseService
+  ) {}
 
   registerForm: FormGroup = new FormGroup(
     {
@@ -51,41 +61,41 @@ export class RegisterComponent implements OnInit {
       : { mismatch: true };
   }
 
-  companyRegisterForm: FormGroup = new FormGroup({
-    companyName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(30),
-    ]),
-    fullName: new FormControl('', [Validators.required]),
-    enterCountry: new FormControl('', [Validators.required]),
-    emailAddress: new FormControl('', [Validators.required, Validators.email]),
-    phoneNumberWithAreaCode: new FormControl('', [Validators.required]),
-    productWantToBuy: new FormControl('', [Validators.required]),
-  });
+  // companyRegisterForm: FormGroup = new FormGroup(
+  //   {
+  //     category: new FormControl(['food', Validators.required]),
+  //     companyName: new FormControl(['', Validators.required]),
+  //     companyEmail: new FormControl([
+  //       '',
+  //       [Validators.required, Validators.email],
+  //     ]),
+  //     password: new FormControl(['', Validators.required]),
+  //     confirmPassword: new FormControl(['', Validators.required]),
+  //     buyerSeller: new FormControl(['', Validators.required]),
+  //     buyerIntention: new FormControl(['']),
+  //     sellerIntention: new FormControl(['']),
+  //   },
+  //   { validators: this.passwordMatchValidator }
+  // );
 
-  registrationForm: FormGroup = new FormGroup({
-    category: new FormControl(['', Validators.required]),
-    companyName: new FormControl(['', Validators.required]),
-    companyEmail: new FormControl([
-      '',
-      [Validators.required, Validators.email],
-    ]),
-    password: new FormControl(['', Validators.required]),
-    confirmPassword: new FormControl(['', Validators.required]),
-    buyerSeller: new FormControl(['', Validators.required]),
-    buyerIntention: new FormControl(['']),
-    sellerIntention: new FormControl(['']),
-  });
-
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router,
-    private afAuth: AngularFireAuth,
-    private firebase: FirebaseService
-  ) {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.companyRegisterForm = this.fb.group(
+      {
+        category: ['food', Validators.required],
+        companyName: new FormControl(['', Validators.required]),
+        companyEmail: new FormControl([
+          '',
+          [Validators.required, Validators.email],
+        ]),
+        password: new FormControl(['', Validators.required]),
+        confirmPassword: new FormControl(['', Validators.required]),
+        buyerSeller: new FormControl(['', Validators.required]),
+        buyerIntention: new FormControl(['']),
+        sellerIntention: new FormControl(['']),
+      },
+      { validators: this.passwordMatchValidator }
+    );
+  }
 
   get registerFormControls() {
     return this.registerForm.controls;
@@ -102,11 +112,11 @@ export class RegisterComponent implements OnInit {
         .then((res: any) => {
           this.router.navigate(['/login']);
           this.afAuth.signOut();
-          const storedUser ={
+          const storedUser = {
             email: userData.email,
             phoneNumber: userData.phoneNumber,
-            username: userData.username
-          }
+            username: userData.username,
+          };
           this.firebase.createUser(storedUser);
           window.alert('Registration successful, please login');
         })
@@ -132,13 +142,20 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
-    if (this.registrationForm.valid) {
-      // Handle form submission
-      console.log(this.registrationForm.value);
-    }
+    console.log('this.registrationForm.value');
   }
 
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
+  }
+
+  showUserCard() {
+    this.userSelected = true;
+    this.companySelected = false;
+  }
+
+  showCompanyCard() {
+    this.userSelected = false;
+    this.companySelected = true;
   }
 }

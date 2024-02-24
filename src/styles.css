@@ -36,6 +36,7 @@ h2,
 h3,
 h4,
 h5,
+h6,
 input,
 label {
   /* font-family: 'assets/BrothertonFreeFont/BrothertonFreeFont.ttf'; */
@@ -75,48 +76,51 @@ label {
   background-color: black;
 }
 
-.btn-outline:hover {
-  font-family: sans-serif;
-  background-color: lightgrey;
-}
-
 .btn-outline {
   font-family: sans-serif;
   color: #0e4360;
 }
 
-.btn-outline-success:hover {
-  background-color: #fffc01;
-  border-color: #fffc01;
-  color: #0e4360;
+.btn-outline:hover {
+  background-color: #0e4360;
+  color: white;
+}
+
+.btn-outline-primary {
+  font-family: sans-serif;
+  background-color: #0e4360;
+  color: white;
+  border: 0;
+}
+
+.btn-outline-primary:active {
+  background-color: red;
 }
 
 .me-6 {
   margin-right: 5rem;
 }
 
-.form-check-input{
-  background-color: #0E4360;
-  border-color: #0E4360;
+.form-check-input {
+  background-color: #0e4360;
+  border-color: #0e4360;
 }
 
 .form-check-input:hover {
-  background-color: #247EAF;
+  background-color: #247eaf;
 }
 
-.form-check-input:active{
-  background-color: #0E4360;
+.form-check-input:active {
+  background-color: #0e4360;
 }
 
-.form-check-input:checked{
-  background-color: #247EAF;
-  
+.form-check-input:checked {
+  background-color: #247eaf;
 }
 
 .mw-10 {
   max-width: 300px;
 }
-
 
 /* 
 #FB2E01 - crvena
