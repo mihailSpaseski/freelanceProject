@@ -16,16 +16,35 @@ export class PreviewdataComponent implements OnInit {
   category!: Category | undefined;
   categories: Category[] = c;
   items!: Product[];
+  publishedBy: string | undefined;
+  publisher: string | undefined;
   @Input() filteredItems: Product[] = [];
 
   constructor(private firebase: FirebaseService) {}
 
   ngOnInit(): void {
-    this.category = this.categories.find((x) => x.name === 'Food');
+    this.category = this.categories.find((cat) => cat.name === 'Food');
 
-    this.firebase.getProductsList().subscribe((x) => {
-      this.items = x;
+    this.firebase.getProductsList().subscribe((foodItems) => {
+      this.items = foodItems;
       this.filteredItems = this.items;
+      // console.log(this.filteredItems);
+
+      foodItems.find((pubedBy) => {
+        this.publishedBy = pubedBy.publishedBy;
+      });
+
+      this.firebase.getUsersList().subscribe((users) => {
+        // users.forEach(element => {
+        //   if (element.key === this.publishedBy){
+        //   }
+        // });
+        // if (userPub.key === this.publishedBy) {
+        //   this.publisher = userPub.username;
+        //   return;
+        // }
+        // });
+      });
     });
   }
 

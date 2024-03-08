@@ -22,9 +22,15 @@
                             <h3 class="mb-4 text-center">Create User Account:</h3>
 
                             <div class="mb-3">
+                                <label for="username" class="form-label">Username:</label>
+                                <input formControlName="username" type="text" id="username" class="form-control" required
+                                    placeholder="Enter Username">
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
-                                <input formControlName="username" type="email" id="email" class="form-control" required
-                                    placeholder="Enter Username or Email">
+                                <input formControlName="email" type="email" id="email" class="form-control" required
+                                    placeholder="Enter Email">
                             </div>
 
                             <div class="mb-3">
@@ -90,9 +96,9 @@
                                 <label class="btn btn-outline-secondary d-grid" for="foodRadio">Food</label>
                             </div>
                             <div class="mb-3">
-                                <input type="radio" class="btn-check" id="marketingRadio" name="category"
-                                    value="marketing" formControlName="category">
-                                <label class="btn btn-outline-secondary d-grid" for="marketingRadio">Marketing</label>
+                                <input type="radio" class="btn-check" id="tourismRadio" name="category"
+                                    value="tourism" formControlName="category">
+                                <label class="btn btn-outline-secondary d-grid" for="tourismRadio">Tourism</label>
                             </div>
                             <div class="mb-3">
                                 <input type="radio" class="btn-check" id="hrRadio" name="category" value="hr"
@@ -107,7 +113,8 @@
 
                         <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'food'">
                             <h3 class="mb-4 text-center">Food Registration</h3>
-                            <!-- Implement Company Name, Email, Password, Confirm Password, Buyer/Seller -->
+                            <!-- Implement Company Name, dropdown from all categories, primarily a buyer/seller, most interested in,
+                                 Password, Confirm Password, Buyer/Seller -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
                                 <input formControlName="username" type="email" id="email" class="form-control" required
@@ -127,8 +134,8 @@
 
                         </div>
 
-                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'marketing'">
-                            <h2 class="mb-4 text-center">Marketing Company Registration Fields</h2>
+                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'tourism'">
+                            <h2 class="mb-4 text-center">Tourism Company Registration Fields</h2>
 
                             <div class="d-grid gap-2">
                                 <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
@@ -155,8 +162,8 @@
                             </div>
                         </div>
 
-                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'marketing'">
-                            <h2 class="mb-4 text-center">Marketing page 3</h2>
+                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'Tourism'">
+                            <h2 class="mb-4 text-center">Tourism page 3</h2>
 
                             <div class="d-grid gap-2">
                                 <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>

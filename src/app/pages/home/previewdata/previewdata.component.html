@@ -27,10 +27,6 @@
                         {{ product.name }}
                     </p>
                     <div>
-
-                        <!-- <p class="card-text fs-6 fw-light text-truncate" style="max-width: 300px;">
-                            {{ product.description }}
-                        </p> -->
                         <p class="card-text fs-6 fw-light" [ngClass]="status ? '' : 'text-truncate mw-10'">
                             {{ product.description }}
                         </p>
@@ -46,9 +42,13 @@
                         <img [src]="product.image" class="img-fluid rounded mx-auto d-block mt-2 mb-3" alt="">
                     </div>
 
+                    <label class="mt-2 mb-3" style="font-size: smaller;">
+                        Published by: {{product.username}}
+                    </label>
+
                     <div class="d-grid gap-2 mx-auto">
                         <button class="btn btn-primary" type="button"
-                            [routerLink]="['/categories/food',product.key]">View Product</button>
+                            [routerLink]="['/categories/food', product.key]">View Product</button>
                     </div>
                 </div>
             </div>

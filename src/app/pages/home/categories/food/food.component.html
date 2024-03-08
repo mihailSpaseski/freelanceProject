@@ -34,13 +34,20 @@
   </div>
 
   <div class="col">
-    <button type="button" class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+    <button *ngIf="!gettingUserID" type="button" class="btn btn-primary rounded" routerLink="/login">
+      Login to Add Products
+    </button>
+
+    <button *ngIf="gettingUserID" type="button" class="btn btn-primary rounded" data-bs-toggle="modal"
+      data-bs-target="#exampleModal">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle"
         viewBox="0 0 17 17">
         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
         <path
           d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
       </svg>
+      Add
     </button>
 
     <!-- separator -->
@@ -96,7 +103,7 @@
             aria-label="description of product" formControlName="description"></textarea>
           <div class="input-group mb-3">
             <input type="file" accept="image/*,.pdf" class="form-control" id="inputGroupFile02"
-              (input)="fileSelected($event)">
+              (input)="fileSelected($event)" formControlName="image">
             <label class="input-group-text" for="inputGroupFile02">Upload</label>
           </div>
           <div class="input-group mb-3" style="display: block">
@@ -104,8 +111,9 @@
 
             <label for="inputGroupSelect01" class="form-label">Choose the category of your product</label>
             <div>
-              <select class="form-select mb-3 mt-2" id="inputGroupSelect01" (change)="categoryChanges($event)">
-                <option selected>Choose...</option>
+              <select class="form-select mb-3 mt-2" id="inputGroupSelect01" formControlName="categoryName"
+                (change)="categoryChanges($event)">
+                <option>Choose...</option>
                 <ng-container *ngFor="let subCategory of category?.subCategories">
                   <option [value]="subCategory?.name">
                     {{ subCategory?.name }}
@@ -122,10 +130,11 @@
               </div>
 
               <div>
-                <select class="form-select" id="inputGroupSelect02" (change)="selectedSubCategory($event)">
-                  <option selected>Choose...</option>
+                <select class="form-select" id="inputGroupSelect02" formControlName="subCategory"
+                  (change)="selectedSubCategory($event)">
+                  <!-- <option selected>Choose...</option> -->
                   <ng-container *ngFor="let subCategory of subCategory?.subCategories">
-                    <option [value]="subCategory?.name">
+                    <option>
                       {{ subCategory?.name }}
                     </option>
                   </ng-container>

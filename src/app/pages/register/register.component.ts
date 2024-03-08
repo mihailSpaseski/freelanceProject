@@ -4,8 +4,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -13,6 +11,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { countries } from 'src/app/shared/country-data-store';
+import { User } from 'src/app/shared/models/users';
 
 @Component({
   selector: 'app-register',
@@ -41,12 +40,13 @@ export class RegisterComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private afAuth: AngularFireAuth,
-    private firebase: FirebaseService
+    private firebaseSer: FirebaseService,
   ) {}
 
   registerForm: FormGroup = new FormGroup(
     {
-      username: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
@@ -102,23 +102,23 @@ export class RegisterComponent implements OnInit {
   }
 
   registerWithEmailPassword() {
-    const userData = Object.assign(this.registerForm.value, {
-      email: this.registerForm.value.username,
-    });
+    const { username, email, password, phoneNumber } = this.registerForm.value;
+
+    if (!this.registerForm.valid || !username || !password || !email) {
+      return;
+    }
 
     if (this.registerForm.valid) {
       this.authService
-        .registerWithEmailPassword(userData)
+        .registerWithEmailPassword({ email, password })
         .then((res: any) => {
-          this.router.navigate(['/login']);
-          this.afAuth.signOut();
-          const storedUser = {
-            email: userData.email,
-            phoneNumber: userData.phoneNumber,
-            username: userData.username,
-          };
-          this.firebase.createUser(storedUser);
-          window.alert('Registration successful, please login');
+            const key = res.user.uid
+            this.firebaseSer.createUser({ key, email, username, phoneNumber });
+
+            window.alert('Registration successful, please login');
+            
+            this.afAuth.signOut();
+            this.router.navigate(['/login']);
         })
         .catch((err: any) => {
           console.error(err);

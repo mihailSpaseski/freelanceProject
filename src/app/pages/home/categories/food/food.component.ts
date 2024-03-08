@@ -12,6 +12,8 @@ import { Product } from '../../../../shared/models/proudctsModel';
 
 // @ts-ignore
 import c from '../../../../../assets/categories.json';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { User } from 'src/app/shared/models/users';
 
 @Component({
   selector: 'app-food',
@@ -26,29 +28,55 @@ export class FoodComponent implements OnInit {
   showSubCategories = false;
   items!: Product[];
   filteredItems: Product[] = [];
+  getUser: User[] = [];
   image: any;
   uploadProgress!: number;
+  currentlyLoggedIn: string | undefined;
+  gettingUserID: string | undefined;
 
   constructor(
     private fb: FormBuilder,
-    private firebase: FirebaseService,
-    private afDatabase: AngularFireDatabase
+    private firebaseSer: FirebaseService,
+    private afDatabase: AngularFireDatabase,
+    private afAuth: AngularFireAuth
   ) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       image: ['', Validators.required],
       description: ['', Validators.required],
       categoryName: ['', Validators.required],
+      publishedBy: [''],
+      username: [''],
+      subCategory: [this.showSubCategories ? Validators.required : []],
     });
   }
 
   ngOnInit(): void {
     this.category = this.categories.find((x) => x.name === 'Food');
 
-    this.firebase.getProductsList().subscribe((x) => {
+    this.afAuth.authState.subscribe(async (user) => {
+      if (user) {
+        this.gettingUserID = user.uid;
+      }
+
+      this.firebaseSer.getUsersList().subscribe(async (res: User[]) => {
+        if (res) {
+          const getUserID = res;
+
+          const userAndProductsKey = getUserID.find(
+            (x: { key: string | undefined }) => x.key === this.gettingUserID
+          );
+
+          this.productForm.patchValue({
+            username: userAndProductsKey?.username,
+          });
+        }
+      });
+    });
+
+    this.firebaseSer.getProductsList().subscribe((x) => {
       this.items = x;
       this.filteredItems = this.items;
-      // console.log(this.items);
     });
   }
 
@@ -57,8 +85,14 @@ export class FoodComponent implements OnInit {
   }
 
   addProduct() {
+    if (!this.gettingUserID) {
+      return window.alert('You are not logged in!');
+    }
+
     if (this.productForm.valid) {
-      this.firebase
+      this.productForm.patchValue({ publishedBy: this.gettingUserID });
+
+      this.firebaseSer
         .pushFileToStorage(this.image, this.productForm.value)
         .subscribe((result) => {
           if (result) {
@@ -73,7 +107,7 @@ export class FoodComponent implements OnInit {
 
   selectedSubCategory($event: Event) {
     this.productForm.addControl(
-      'categoryName_1',
+      'subCategory',
       // @ts-ignore
       new FormControl($event.target.value)
     );
@@ -111,7 +145,6 @@ export class FoodComponent implements OnInit {
   }
 
   filterButtons(text: string) {
-    console.log(text);
     if (!text) {
       this.filteredItems = this.items;
       return;
@@ -120,7 +153,6 @@ export class FoodComponent implements OnInit {
     this.filteredItems = this.items.filter((itemFiltered) =>
       itemFiltered?.categoryName.toLowerCase().includes(text.toLowerCase())
     );
-    // console.log(this.filteredItems);
   }
 
   clearFilter() {

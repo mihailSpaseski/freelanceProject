@@ -1,8 +1,9 @@
 export interface User {
     key: string;
-    name: string;
-    surname: string;
     email: string;
+    username: string;
+    photoURL: string;
+    emailVerified: boolean;
     admin: boolean;
     premiumAccount: boolean;
-}
+ }
