@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/proudctsModel';
@@ -18,32 +19,24 @@ export class PreviewdataComponent implements OnInit {
   items!: Product[];
   publishedBy: string | undefined;
   publisher: string | undefined;
+  currentRoute?: string;
   @Input() filteredItems: Product[] = [];
 
-  constructor(private firebase: FirebaseService) {}
+  constructor(private firebase: FirebaseService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    if (this.route.snapshot.url[0].path) {
+      this.currentRoute = this.route.snapshot.url[0].path;
+    } 
+
     this.category = this.categories.find((cat) => cat.name === 'Food');
 
     this.firebase.getProductsList().subscribe((foodItems) => {
       this.items = foodItems;
       this.filteredItems = this.items;
-      // console.log(this.filteredItems);
 
       foodItems.find((pubedBy) => {
         this.publishedBy = pubedBy.publishedBy;
-      });
-
-      this.firebase.getUsersList().subscribe((users) => {
-        // users.forEach(element => {
-        //   if (element.key === this.publishedBy){
-        //   }
-        // });
-        // if (userPub.key === this.publishedBy) {
-        //   this.publisher = userPub.username;
-        //   return;
-        // }
-        // });
       });
     });
   }

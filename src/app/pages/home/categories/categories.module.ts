@@ -14,7 +14,8 @@ const routes: Routes = [
   {path: 'food', component: FoodComponent},
   {path: 'human-resources', component: HrComponent},
   {path: 'tourism', component: TourismComponent},
-  {path: 'food/:id', component: ViewdetailsComponent}
+  {path: 'food/:id', component: ViewdetailsComponent},
+  {path: 'home/:id', component: ViewdetailsComponent}
 ];
 
 @NgModule({

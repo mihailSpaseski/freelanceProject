@@ -9,6 +9,7 @@ import { Product } from '../shared/models/proudctsModel';
 import { FileUpload } from '../shared/models/fileUpload';
 import firebase from 'firebase/compat/app';
 import { User } from '../shared/models/users';
+import { newsModel } from '../shared/models/newsModel';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +17,13 @@ import { User } from '../shared/models/users';
 export class FirebaseService {
   productsRef: AngularFireList<Product>;
   usersRef: AngularFireList<any>;
+  newsRef: AngularFireList<any>;
 
   productsUrl = '/products';
   usersUrl = '/users';
+  newsUrl = '/news';
   private basePath = '/uploads';
+  private newsPath = '/news';
   // userbyid = firebase.database().ref('/users');
 
 
@@ -29,6 +33,7 @@ export class FirebaseService {
   ) {
     this.productsRef = database.list(this.productsUrl);
     this.usersRef = database.list(this.usersUrl);
+    this.newsRef = database.list(this.newsUrl);
   }
 
   // createUser(value: any): Promise<boolean> {
@@ -46,6 +51,10 @@ export class FirebaseService {
     return this.usersRef;
   }
 
+  getNews() {
+    return this.newsRef;
+  }
+
   updateUser(key: string, value: any) {
     return this.usersRef.update(key, value);
   }
@@ -60,6 +69,10 @@ export class FirebaseService {
 
   createProduct(value: any) {
     this.productsRef.push(value);
+  }
+
+  createNewsArticle(value: any) {
+    this.newsRef.push(value);
   }
 
   getProducts() {
@@ -99,6 +112,17 @@ export class FirebaseService {
       );
   }
 
+  getNewsList(): Observable<newsModel[]> {
+    // @ts-ignore
+    return this.getNews()
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      );
+  }
+
   updateProduct(key: string, value: any) {
     return this.productsRef.update(key, value);
   }
@@ -109,9 +133,8 @@ export class FirebaseService {
 
   pushFileToStorage(
     fileUpload: FileUpload,
-    product: any
+    product: any,
   ): Observable<number | undefined> {
-    // console.log(fileUpload);
     const filePath = `${this.basePath}/${fileUpload.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload);
@@ -122,13 +145,33 @@ export class FirebaseService {
         finalize(() => {
           storageRef.getDownloadURL().subscribe((downloadURL) => {
             product.image = downloadURL;
-            // console.log('here');
             this.createProduct(product);
           });
         })
       )
       .subscribe();
+    return uploadTask.percentageChanges();
+  }
 
+  pushNewsToStorage(
+    fileUpload: FileUpload,
+    article: any,
+  ): Observable<number | undefined> {
+    const filePath = `${this.newsPath}/${fileUpload.name}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, fileUpload);
+
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe((downloadURL) => {
+            article.image = downloadURL;
+            this.createNewsArticle(article);
+          });
+        })
+      )
+      .subscribe();
     return uploadTask.percentageChanges();
   }
 

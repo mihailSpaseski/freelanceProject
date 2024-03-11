@@ -1,6 +1,11 @@
 <div class="container">
 
-  <button class="btn btn-primary mt-3" [routerLink]="['../']">Back</button>
+  <button *ngIf="currentRoute != 'home'" class="btn btn-primary mt-3" [routerLink]="['../']">Back</button>
+  <button *ngIf="currentRoute === 'home'" class="btn btn-primary mt-3" [routerLink]="['/home']">Back</button>
+
+  <div class="mt-2 mb-3">
+    <label>Published by: <h3 class="center" *ngIf="product">{{product.username}}</h3></label>
+  </div>
 
   <div class="row">
     <div class="col-md-8 mt-3">
@@ -25,10 +30,6 @@
                 alt="">
             </div>
 
-            <!-- <div class="d-grid gap-2 mx-auto">
-                <button class="btn btn-primary" type="button" [routerLink]="['/details', product.key]">View
-                  Product</button>
-              </div> -->
           </div>
         </div>
         <div class="w-100"></div>

@@ -1,29 +1,98 @@
-<div>
-    <div>
-        <p class="fs-5">Some News Title</p>
-        <p style="font-weight: 200;" class="fs-6">Description....</p>
-        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+<div *ngIf="isNewsPage()" class="container">
+    <div class="center">
+        <span class="me-4">
+            <label class="fs-1 mt-1 mb-3">News</label>
+        </span>
+        <span class="d-flex p-3">
+            <!-- stavi ng if za dali user e logiran i dali userot e administrator -->
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal">Add new</button>
+        </span>
+    </div>
+    <div class="row">
+        <div class="col-4" *ngFor="let newsArticle of news">
+            <div class="card mb-3" style="max-width: 600px; max-height: 600px;" >
+                <div class="row g-0 ps-2">
+                    <div class="col-md-4 d-flex justify-content-center align-items-center"><img
+                            class="img-fluid mw-100 mh-100" src="{{newsArticle.image}}" alt="..." />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body" >
+                            <h5 class="card-title">{{newsArticle.newsTitle}} </h5>
+                            <p class="card-text">{{newsArticle.newsDescription}}</p>
+                            <p class="card-text"><small class="text-muted">Published On: {{newsArticle.newsPublishedOn}}</small></p>
+                            <p class="card-text"><small class="text-muted">Published By: {{newsArticle.username}}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div>
-    <div>
-        <p class="fs-5">Some News Title</p>
-        <p style="font-weight: 200;" class="fs-6">Description....</p>
-        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
-    </div>
+<div *ngIf="!isNewsPage()" class="container">
+    <h1>NOT NEWS PAGE</h1>
 </div>
-<div>
-    <div>
-        <p class="fs-5">Some News Title</p>
-        <p style="font-weight: 200;" class="fs-6">Description....</p>
-        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
-    </div>
-</div>
-<div>
-    <div>
-        <p class="fs-5">Some News Title</p>
-        <p style="font-weight: 200;" class="fs-6">Description....</p>
-        <img class="img-fluid mb-3 mt-2" src="/assets/300.png">
+
+
+
+<!-- modal starts here -->
+
+<div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newsModalLabel">
+                    Create new News post
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="newsForm">
+                    <label for="title of news" class="form-label">Enter the title</label>
+                    <input class="form-control mb-3 mt-2" type="text" placeholder="Title of news article"
+                        aria-label="title of news" formControlName="newsTitle" />
+
+                    <label for="inputGroupFile02" class="form-label">Enter the Images</label>
+                    <div class="input-group mb-3">
+                        <input type="file" accept="image/*,.pdf" class="form-control" id="inputGroupFile02"
+                            (input)="newsImageSelected($event)" #imageInput>
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    </div>
+
+                    <label for="URL of news" class="form-label">Enter the URL</label>
+                    <input class="form-control mb-3 mt-2" type="text" placeholder="URL of news article"
+                        aria-label="URL of news" formControlName="newsURL" />
+
+                    <label for="newsDescription" class="form-label">Enter the description</label>
+                    <textarea class="form-control" id="newsDescription" rows="3" formControlName="newsDescription"></textarea>
+
+                    <form [formGroup]="categoryForm">
+                        <label for="newsCat" class="form-label">Choose the category of the news</label>
+                        <div class="dropdown d-grid">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="newsCat"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{categoryForm.get('newsCat')?.value || 'Select Category'}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="newsCat">
+                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Food')">Food</li>
+                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Human Resources')">Human Resources</li>
+                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Tourism')">Tourism</li>
+                            </ul>
+                        </div>
+                    </form>
+                </form>
+            </div>
+            <div class="modal-footer d-grid gap-2 d-md-flex justify-content-md-center">
+                <button type="button" class="btn btn-outline" data-bs-dismiss="modal" (click)="clearForm(); imageInput.value = ''">
+                    Close
+                </button>
+                <button type="button" class="btn btn-outline" (click)="clearForm(); imageInput.value = ''">
+                    Clear Form
+                </button>
+                <button type="button" class="btn btn-primary" [disabled]="!categoryForm.valid" (click)="addNews()" data-bs-dismiss="modal">
+                    Save changes
+                </button>
+            </div>
+        </div>
     </div>
 </div>

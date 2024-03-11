@@ -10,21 +10,25 @@ import { Product } from 'src/app/shared/models/proudctsModel';
 })
 export class ViewdetailsComponent implements OnInit {
   product!: Product;
-  constructor (private route: ActivatedRoute, private firebase: FirebaseService) {}
-  
+  currentRoute?: string;
+  constructor(
+    private route: ActivatedRoute,
+    private firebase: FirebaseService
+  ) {}
 
   ngOnInit(): void {
+    this.currentRoute = this.route.snapshot.url[0].path;
+    
     this.route.paramMap.subscribe((product) => {
       const key = product.get('id');
-     if(key){
-      this.firebase.getProductsList().subscribe((x) => {
-        const product = x.find(x=> x.key === key);
-        if(product){
-          this.product = product;
-          console.log(this.product)
-        }
-      });
-     }
+      if (key) {
+        this.firebase.getProductsList().subscribe((x) => {
+          const product = x.find((x) => x.key === key);
+          if (product) {
+            this.product = product;
+          }
+        });
+      }
     });
   }
 }

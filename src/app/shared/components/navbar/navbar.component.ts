@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import firebase from 'firebase/compat/app';
 import { User } from '../../models/users';
 
 @Component({

@@ -10,7 +10,7 @@ import { NewsComponent } from './pages/home/news/news.component';
 import { MyprofileComponent } from './pages/my-profile/myprofile.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {
