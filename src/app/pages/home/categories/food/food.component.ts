@@ -9,11 +9,11 @@ import {
 } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Product } from '../../../../shared/models/proudctsModel';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { User } from 'src/app/shared/models/users';
 
 // @ts-ignore
 import c from '../../../../../assets/categories.json';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { User } from 'src/app/shared/models/users';
 
 @Component({
   selector: 'app-food',

@@ -8,4 +8,3 @@ export interface SubCategory {
   name: string;
   subCategories: SubCategory[];
 }
-

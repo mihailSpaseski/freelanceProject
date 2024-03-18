@@ -11,7 +11,11 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { countries } from 'src/app/shared/country-data-store';
-import { User } from 'src/app/shared/models/users';
+import { foodModel } from 'src/app/shared/models/foodModel';
+import { Category, SubCategory } from 'src/app/shared/models/category';
+
+// @ts-ignore
+import * as categoryItems from '../../../assets/categories.json';
 
 @Component({
   selector: 'app-register',
@@ -19,15 +23,24 @@ import { User } from 'src/app/shared/models/users';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+
+
+  food: any | undefined;
+  categoryC: any = categoryItems;
+
+  foodCat!: FormGroup;
+  categoryForm!: FormGroup;
+
   fieldTextType: boolean = false;
 
   companyRegisterForm: FormGroup = new FormGroup({});
   currentPage: number = 1;
 
+  
   public countries: any = countries;
   private selected: any;
 
-  userSelected: boolean = false;
+  userSelected: boolean = true;
   companySelected: boolean = false;
 
   companyType: number = 1;
@@ -40,7 +53,7 @@ export class RegisterComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private afAuth: AngularFireAuth,
-    private firebaseSer: FirebaseService,
+    private firebaseSer: FirebaseService
   ) {}
 
   registerForm: FormGroup = new FormGroup(
@@ -61,23 +74,6 @@ export class RegisterComponent implements OnInit {
       : { mismatch: true };
   }
 
-  // companyRegisterForm: FormGroup = new FormGroup(
-  //   {
-  //     category: new FormControl(['food', Validators.required]),
-  //     companyName: new FormControl(['', Validators.required]),
-  //     companyEmail: new FormControl([
-  //       '',
-  //       [Validators.required, Validators.email],
-  //     ]),
-  //     password: new FormControl(['', Validators.required]),
-  //     confirmPassword: new FormControl(['', Validators.required]),
-  //     buyerSeller: new FormControl(['', Validators.required]),
-  //     buyerIntention: new FormControl(['']),
-  //     sellerIntention: new FormControl(['']),
-  //   },
-  //   { validators: this.passwordMatchValidator }
-  // );
-
   ngOnInit(): void {
     this.companyRegisterForm = this.fb.group(
       {
@@ -95,6 +91,18 @@ export class RegisterComponent implements OnInit {
       },
       { validators: this.passwordMatchValidator }
     );
+
+    this.categoryForm = this.fb.group({
+      interestedIn: ['', Validators.required], // Initialize with an empty value
+    });
+
+
+    this.foodCat = this.fb.group({
+      interestedInSubCategory: ['', Validators.required], 
+    })
+
+    this.food = this.categoryC[0]['subCategories'];
+
   }
 
   get registerFormControls() {
@@ -103,8 +111,10 @@ export class RegisterComponent implements OnInit {
 
   registerWithEmailPassword() {
     const { username, email, password, phoneNumber } = this.registerForm.value;
+    const { interestedIn } = this.categoryForm.value;
+    const { interestedInSubCategory } = this.foodCat.value;
 
-    if (!this.registerForm.valid || !username || !password || !email) {
+    if (!this.registerForm.valid || !username || !password || !email || !phoneNumber || !this.categoryForm.value || !this.foodCat.value) {
       return;
     }
 
@@ -112,13 +122,13 @@ export class RegisterComponent implements OnInit {
       this.authService
         .registerWithEmailPassword({ email, password })
         .then((res: any) => {
-            const key = res.user.uid
-            this.firebaseSer.createUser({ key, email, username, phoneNumber });
+          const key = res.user.uid;
+          this.firebaseSer.createUser({ key, email, username, phoneNumber, interestedIn, interestedInSubCategory });
 
-            window.alert('Registration successful, please login');
-            
-            this.afAuth.signOut();
-            this.router.navigate(['/login']);
+          window.alert('Registration successful, please login');
+
+          this.afAuth.signOut();
+          this.router.navigate(['/login']);
         })
         .catch((err: any) => {
           console.error(err);

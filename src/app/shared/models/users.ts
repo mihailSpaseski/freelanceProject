@@ -6,4 +6,7 @@ export interface User {
     emailVerified: boolean;
     admin: boolean;
     premiumAccount: boolean;
+    interestedIn: string;
+    interestedInSubCategory: string;
+    location: string;
  }

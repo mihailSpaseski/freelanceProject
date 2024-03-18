@@ -10,7 +10,8 @@
     </div>
     <div class="row">
         <div class="col-4" *ngFor="let newsArticle of news">
-            <div class="card mb-3" style="max-width: 600px; max-height: 600px;" >
+
+            <div class="card mb-3" style="max-width: 600px; max-height: 600px; border: 0;" >
                 <div class="row g-0 ps-2">
                     <div class="col-md-4 d-flex justify-content-center align-items-center"><img
                             class="img-fluid mw-100 mh-100" src="{{newsArticle.image}}" alt="..." />
@@ -30,7 +31,7 @@
 </div>
 
 <div *ngIf="!isNewsPage()" class="container">
-    <h1>NOT NEWS PAGE</h1>
+    <h1>Quick News</h1>
 </div>
 
 
@@ -64,7 +65,8 @@
                         aria-label="URL of news" formControlName="newsURL" />
 
                     <label for="newsDescription" class="form-label">Enter the description</label>
-                    <textarea class="form-control" id="newsDescription" rows="3" formControlName="newsDescription"></textarea>
+                    <textarea class="form-control" id="newsDescription" rows="3"
+                        formControlName="newsDescription"></textarea>
 
                     <form [formGroup]="categoryForm">
                         <label for="newsCat" class="form-label">Choose the category of the news</label>
@@ -74,22 +76,28 @@
                                 {{categoryForm.get('newsCat')?.value || 'Select Category'}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="newsCat">
-                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Food')">Food</li>
-                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Human Resources')">Human Resources</li>
-                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Tourism')">Tourism</li>
+                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Food')">Food
+                                </li>
+                                <li class="dropdown-item"
+                                    (click)="categoryForm.get('newsCat')!.setValue('Human Resources')">Human Resources
+                                </li>
+                                <li class="dropdown-item" (click)="categoryForm.get('newsCat')!.setValue('Tourism')">
+                                    Tourism</li>
                             </ul>
                         </div>
                     </form>
                 </form>
             </div>
             <div class="modal-footer d-grid gap-2 d-md-flex justify-content-md-center">
-                <button type="button" class="btn btn-outline" data-bs-dismiss="modal" (click)="clearForm(); imageInput.value = ''">
+                <button type="button" class="btn btn-outline" data-bs-dismiss="modal"
+                    (click)="clearForm(); imageInput.value = ''">
                     Close
                 </button>
                 <button type="button" class="btn btn-outline" (click)="clearForm(); imageInput.value = ''">
                     Clear Form
                 </button>
-                <button type="button" class="btn btn-primary" [disabled]="!categoryForm.valid" (click)="addNews()" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-primary" [disabled]="!categoryForm.valid" (click)="addNews()"
+                    data-bs-dismiss="modal">
                     Save changes
                 </button>
             </div>

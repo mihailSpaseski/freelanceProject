@@ -1,16 +1,12 @@
 <div class="container-fluid mt-2">
     <h2 class="text-center">What type of account do you want to create:</h2>
     <div class="d-flex justify-content-center mt-3">
-        <!-- <button class="btn btn-primary me-3" (click)="showUserCard()">User account</button>
-        <button class="btn btn-primary" (click)="showCompanyCard()">Company account</button> -->
 
-        <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
+        <input type="radio" checked class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
         <label class="btn btn-outline-primary me-3" for="success-outlined" (click)="showUserCard()">User account</label>
 
         <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
         <label class="btn btn-outline-primary" for="danger-outlined" (click)="showCompanyCard()">Company account</label>
-
-
 
     </div>
     <div class="text-center mt-4">
@@ -22,21 +18,9 @@
                             <h3 class="mb-4 text-center">Create User Account:</h3>
 
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username:</label>
-                                <input formControlName="username" type="text" id="username" class="form-control" required
-                                    placeholder="Enter Username">
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
                                 <input formControlName="email" type="email" id="email" class="form-control" required
                                     placeholder="Enter Email">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="phoneNumber" class="form-label">Phone Number:</label>
-                                <input formControlName="phoneNumber" type="number" id="phoneNumber" class="form-control"
-                                    required placeholder="07x xxx xxx">
                             </div>
 
                             <div class="mb-3">
@@ -54,6 +38,11 @@
                                 </div>
                             </div>
 
+                            <div *ngIf="registerForm?.errors?.['mismatch'] && registerForm?.touched"
+                                class="alert alert-danger">
+                                Passwords do not match.
+                            </div>
+
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password:</label>
                                 <input formControlName="confirmPassword" type="password" id="confirmPassword"
@@ -61,14 +50,102 @@
                                     placeholder="Enter your password" />
                             </div>
 
-                            <div *ngIf="registerForm?.errors?.['mismatch'] && registerForm?.touched"
-                                class="alert alert-danger">
-                                Passwords do not match.
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username:</label>
+                                <input formControlName="username" type="text" id="username" class="form-control"
+                                    required placeholder="Enter Username">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label">Phone Number:</label>
+                                <input formControlName="phoneNumber" type="number" id="phoneNumber" class="form-control"
+                                    required placeholder="07x xxx xxx">
+                            </div>
+
+                            <label for="address" class="form-label">Address (Optional):</label>
+                            <div class="input-group mb-3">
+                                <input type="address" id="address" class="form-control" required
+                                    placeholder="Enter Your Address">
+                                <span class="input-group-text" id="basic-addon2"><button
+                                        class="btn btn-primary">Map</button></span>
+                            </div>
+
+                            <div class="mt-1 mb-3">
+                                <label for="interestedIn" class="form-label">I am interested in:</label>
+                                <div class="dropdown d-grid">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="interestedIn"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{categoryForm.get('interestedIn')?.value || 'Select Category'}}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                        <li class="dropdown-item"
+                                            (click)="categoryForm.get('interestedIn')!.setValue('Food')">Food
+                                        </li>
+                                        <li class="dropdown-item"
+                                            (click)="categoryForm.get('interestedIn')!.setValue('Human Resources')">
+                                            Human Resources
+                                        </li>
+                                        <li class="dropdown-item"
+                                            (click)="categoryForm.get('interestedIn')!.setValue('Tourism')">
+                                            Tourism</li>
+                                    </ul>
+                                </div>
+
+                                <div *ngIf="categoryForm.get('interestedIn')?.value === 'Food'">
+
+                                    <label for="foodCat" class="form-label mt-1">Specifically:</label>
+                                    <div class="dropdown d-grid">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="foodCat"
+                                            data-bs-toggle="dropdown" aria-expanded="false" value="listItem">
+                                            {{foodCat.get('interestedInSubCategory')?.value ||
+                                            'Select Food Sub Category'}}
+
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                            <li class="dropdown-item" id="listItem" *ngFor="let item of food"
+                                                (click)="foodCat.get('interestedInSubCategory')!.setValue(item.name)">
+                                                {{item.name}}
+                                            </li>
+
+                                            <!-- this creates a google map on the page with the given lat/lng from -->
+                                            <!-- the component as the initial center of the map: -->
+
+                                            <!-- <div class='agm-map-container-inner sebm-google-map-container-inner'></div>
+                                            <div class='agm-map-content'>
+                                                <ng-content></ng-content>
+                                            </div> -->
+
+                                            <!-- <li class="dropdown-item"
+                                                (click)="categoryForm.get('interestedIn')!.setValue('Human Resources')">
+                                                Human Resources
+                                            </li>
+                                            <li class="dropdown-item"
+                                                (click)="categoryForm.get('interestedIn')!.setValue('Tourism')">
+                                                Tourism</li> -->
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div *ngIf="categoryForm.get('interestedIn')?.value === 'Human Resources'">
+
+                                    <button class="btn btn-outline mt-2 mb-3" disabled>
+                                        Human Resources
+                                    </button>
+                                </div>
+                                <div *ngIf="categoryForm.get('interestedIn')?.value === 'Tourism'">
+
+                                    <button class="btn btn-outline mt-2 mb-3" disabled>
+                                        Tourism
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="mb-3 text-center">
-                                <button (click)="registerWithEmailPassword()" [disabled]="registerForm.invalid"
+
+                                <button (click)="registerWithEmailPassword()"
+                                    [disabled]="registerForm.invalid || categoryForm.invalid || foodCat.invalid"
                                     class="btn btn-primary">Create Account</button>
+
                             </div>
                             <div class="mb-3 text-center">
                                 <button type="submit" class="btn btn-link">Forgot Password</button>
@@ -81,6 +158,7 @@
     </div>
 
 
+    <!-- --------------------------------------------------------COMPANY ACCOUNT ------------------------------------------ -->
     <div *ngIf="companySelected" class="card">
         <div class="container mt-4 mb-5">
             <div class="row justify-content-center">
@@ -96,8 +174,8 @@
                                 <label class="btn btn-outline-secondary d-grid" for="foodRadio">Food</label>
                             </div>
                             <div class="mb-3">
-                                <input type="radio" class="btn-check" id="tourismRadio" name="category"
-                                    value="tourism" formControlName="category">
+                                <input type="radio" class="btn-check" id="tourismRadio" name="category" value="tourism"
+                                    formControlName="category">
                                 <label class="btn btn-outline-secondary d-grid" for="tourismRadio">Tourism</label>
                             </div>
                             <div class="mb-3">

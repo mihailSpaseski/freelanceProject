@@ -11,6 +11,7 @@ import { environment } from 'src/environment/environment';
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 import { PagesModule } from "./pages/pages.module";
 import { SharedModule } from "./shared/shared.module";
+// import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SharedModule } from "./shared/shared.module";
     AngularFireStorageModule,
     PagesModule,
     SharedModule,
+    // AgmCoreModule.forRoot({apiKey: 'AIzaSyCSDrOmWXOAKB74JDbOZhQqvRLf4ZlWXgk'}),
   ],
   providers: [],
   bootstrap: [AppComponent]

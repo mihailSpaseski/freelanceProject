@@ -24,6 +24,10 @@
   font-style: normal;
 }
 
+.agm-map {
+  height: 300px;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -69,11 +73,22 @@ label {
   font-family: sans-serif;
   background-color: #0e4360;
   border-color: #0e4360;
+  box-shadow: 0rem 0.5rem 1rem #247EAF;
+}
+
+.btn-primary:hover {
+  font-family: sans-serif;
+  background-color: #247EAF;
+  border-color: #247EAF;
 }
 
 .btn-secondary {
   font-family: sans-serif;
   background-color: black;
+}
+
+.btn-secondary:hover {
+  background-color: #247EAF;
 }
 
 .btn-outline {
@@ -82,8 +97,9 @@ label {
 }
 
 .btn-outline:hover {
-  background-color: #0e4360;
+  background-color: #247EAF;
   color: white;
+  /* box-shadow: 0rem 0.5rem 1rem lightgray; */
 }
 
 .btn-outline-primary {
@@ -91,10 +107,17 @@ label {
   background-color: #0e4360;
   color: white;
   border: 0;
+  box-shadow: 0rem 0.5rem 1rem #247EAF;
 }
 
 .btn-outline-primary:active {
-  background-color: red;
+  background-color: #247EAF;
+  /* box-shadow: 0rem 0.5rem 1rem #247EAF; */
+}
+
+.btn-outline-primary:hover {
+  background-color: #247EAF;
+  /* box-shadow: 0rem 0.5rem 1rem #247EAF; */
 }
 
 .me-6 {
@@ -116,6 +139,10 @@ label {
 
 .form-check-input:checked {
   background-color: #247eaf;
+}
+
+.card {
+  box-shadow: 0rem 0.5rem 1rem #247EAF;
 }
 
 .mw-10 {
