@@ -43,6 +43,16 @@
                                 Passwords do not match.
                             </div>
 
+                            <div *ngIf="!registerForm?.errors?.['mismatch'] && registerForm?.touched && registerForm.get('password')!.value?.length >= 6"
+                                class="alert alert-success">
+                                Passwords Match.
+                            </div>
+
+                            <div *ngIf="!registerForm?.errors?.['mismatch'] && registerForm?.touched && registerForm.get('password')!.value?.length < 6"
+                                class="alert alert-danger">
+                                Passwords too short. Please use a password with minumum of 6 characters!
+                            </div>
+
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password:</label>
                                 <input formControlName="confirmPassword" type="password" id="confirmPassword"
@@ -78,15 +88,16 @@
                                         {{categoryForm.get('interestedIn')?.value || 'Select Category'}}
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="interestedIn">
-                                        <li class="dropdown-item"
-                                            (click)="categoryForm.get('interestedIn')!.setValue('Food')">Food
+                                        <li class="dropdown-item" (click)="categoryForm.get('interestedIn')!.setValue('Food'); 
+                                            foodCat.get('interestedInSubCategory')!.setValue('')">
+                                            Food
                                         </li>
-                                        <li class="dropdown-item"
-                                            (click)="categoryForm.get('interestedIn')!.setValue('Human Resources')">
+                                        <li class="dropdown-item" (click)="categoryForm.get('interestedIn')!.setValue('Human Resources'); 
+                                            foodCat.get('interestedInSubCategory')!.setValue('')">
                                             Human Resources
                                         </li>
-                                        <li class="dropdown-item"
-                                            (click)="categoryForm.get('interestedIn')!.setValue('Tourism')">
+                                        <li class="dropdown-item" (click)="categoryForm.get('interestedIn')!.setValue('Tourism'); 
+                                            foodCat.get('interestedInSubCategory')!.setValue('')">
                                             Tourism</li>
                                     </ul>
                                 </div>
@@ -106,49 +117,56 @@
                                                 (click)="foodCat.get('interestedInSubCategory')!.setValue(item.name)">
                                                 {{item.name}}
                                             </li>
-
-                                            <!-- this creates a google map on the page with the given lat/lng from -->
-                                            <!-- the component as the initial center of the map: -->
-
-                                            <!-- <div class='agm-map-container-inner sebm-google-map-container-inner'></div>
-                                            <div class='agm-map-content'>
-                                                <ng-content></ng-content>
-                                            </div> -->
-
-                                            <!-- <li class="dropdown-item"
-                                                (click)="categoryForm.get('interestedIn')!.setValue('Human Resources')">
-                                                Human Resources
-                                            </li>
-                                            <li class="dropdown-item"
-                                                (click)="categoryForm.get('interestedIn')!.setValue('Tourism')">
-                                                Tourism</li> -->
                                         </ul>
                                     </div>
 
                                 </div>
                                 <div *ngIf="categoryForm.get('interestedIn')?.value === 'Human Resources'">
 
-                                    <button class="btn btn-outline mt-2 mb-3" disabled>
-                                        Human Resources
-                                    </button>
+                                    <label for="HRCat" class="form-label mt-1">Specifically:</label>
+                                    <div class="dropdown d-grid">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="HRCat"
+                                            data-bs-toggle="dropdown" aria-expanded="false" value="listItem">
+                                            {{foodCat.get('interestedInSubCategory')?.value ||
+                                            'Select HR Sub Category'}}
+
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                            <li class="dropdown-item" id="listItem" *ngFor="let item of hr"
+                                                (click)="foodCat.get('interestedInSubCategory')!.setValue(item.name)">
+                                                {{item.name}}
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                 </div>
                                 <div *ngIf="categoryForm.get('interestedIn')?.value === 'Tourism'">
 
-                                    <button class="btn btn-outline mt-2 mb-3" disabled>
-                                        Tourism
-                                    </button>
+                                    <label for="tourCat" class="form-label mt-1">Specifically:</label>
+                                    <div class="dropdown d-grid">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="tourCat"
+                                            data-bs-toggle="dropdown" aria-expanded="false" value="listItem">
+                                            {{foodCat.get('interestedInSubCategory')?.value ||
+                                            'Select Tourism Sub Category'}}
+
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                            <li class="dropdown-item" id="listItem" *ngFor="let item of tourism"
+                                                (click)="foodCat.get('interestedInSubCategory')!.setValue(item.name)">
+                                                {{item.name}}
+                                            </li>
+                                        </ul>
+
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="mb-3 text-center">
+                                <div class="mb-3 mt-3 text-center">
 
-                                <button (click)="registerWithEmailPassword()"
-                                    [disabled]="registerForm.invalid || categoryForm.invalid || foodCat.invalid"
-                                    class="btn btn-primary">Create Account</button>
+                                    <button (click)="registerWithEmailPassword()"
+                                        [disabled]="registerForm.invalid || categoryForm.invalid || foodCat.invalid"
+                                        class="btn btn-primary">Create Account</button>
 
-                            </div>
-                            <div class="mb-3 text-center">
-                                <button type="submit" class="btn btn-link">Forgot Password</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -157,105 +175,177 @@
         </div>
     </div>
 
-
     <!-- --------------------------------------------------------COMPANY ACCOUNT ------------------------------------------ -->
+
     <div *ngIf="companySelected" class="card">
         <div class="container mt-4 mb-5">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center text-center">
                 <div class="col-md-6">
-                    <form [formGroup]="companyRegisterForm" (ngSubmit)="submitForm()" class="border p-4 rounded shadow">
+                    <form [formGroup]="companyRegisterForm" class="border p-4 rounded shadow">
+                        <h3 class="mb-4 text-center">Create Company Account:</h3>
 
-                        <div *ngIf="currentPage === 1">
-                            <h3 class="mb-3 text-center">Create Company Account:</h3>
-                            <h6 class="mb-2">Select Category:</h6>
-                            <div class="mb-3 ">
-                                <input type="radio" class="btn-check" id="foodRadio" name="category" value="food"
-                                    formControlName="category">
-                                <label class="btn btn-outline-secondary d-grid" for="foodRadio">Food</label>
-                            </div>
-                            <div class="mb-3">
-                                <input type="radio" class="btn-check" id="tourismRadio" name="category" value="tourism"
-                                    formControlName="category">
-                                <label class="btn btn-outline-secondary d-grid" for="tourismRadio">Tourism</label>
-                            </div>
-                            <div class="mb-3">
-                                <input type="radio" class="btn-check" id="hrRadio" name="category" value="hr"
-                                    formControlName="category">
-                                <label class="btn btn-outline-secondary d-grid" for="hrRadio">Human
-                                    Resources</label>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
+                        <div class="mb-3">
+                            <label for="companyEmail" class="form-label">Email:</label>
+                            <input formControlName="companyEmail" type="email" id="companyEmail" class="form-control"
+                                placeholder="Enter Company Email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="companyPassword" class="form-label">Password:</label>
+                            <div class="input-group">
+                                <input [type]="fieldTextType ? 'text' : 'password'" class="form-control"
+                                    id="companyPassword" formControlName="companyPassword" required
+                                    placeholder="Enter your password" />
+                                <button class="btn btn-outline-secondary" type="button" id="toggleCompanyPassword"
+                                    (click)="toggleCompanyType()">
+                                    <i class="bi" [ngClass]="{
+                                                    'bi-eye': !fieldTextType,
+                                                    'bi-eye-slash': fieldTextType
+                                                }"></i>
+                                </button>
                             </div>
                         </div>
 
-                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'food'">
-                            <h3 class="mb-4 text-center">Food Registration</h3>
-                            <!-- Implement Company Name, dropdown from all categories, primarily a buyer/seller, most interested in,
-                                 Password, Confirm Password, Buyer/Seller -->
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email:</label>
-                                <input formControlName="username" type="email" id="email" class="form-control" required
-                                    placeholder="Enter Email">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="phoneNumber" class="form-label">Phone Number:</label>
-                                <input formControlName="phoneNumber" type="number" id="phoneNumber" class="form-control"
-                                    required placeholder="07x xxx xxx">
-                            </div>
-
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
-                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
-                            </div>
-
+                        <div *ngIf="companyRegisterForm?.errors?.['mismatch'] && companyRegisterForm?.touched"
+                            class="alert alert-danger">
+                            Passwords do not match.
                         </div>
 
-                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'tourism'">
-                            <h2 class="mb-4 text-center">Tourism Company Registration Fields</h2>
+                        <div *ngIf="!companyRegisterForm?.errors?.['mismatch'] && companyRegisterForm?.touched && companyRegisterForm.get('companyPassword')!.value?.length >= 3"
+                            class="alert alert-success">
+                            Passwords Match.
+                        </div>
 
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
-                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
+                        <div class="mb-3">
+                            <label for="companyConfirmPassword" class="form-label">Confirm Password:</label>
+                            <input formControlName="companyConfirmPassword" type="password" id="companyConfirmPassword"
+                                [type]="fieldTextType ? 'text' : 'password'" class="form-control"
+                                placeholder="Enter your password" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="companyName" class="form-label">Company Name:</label>
+                            <input formControlName="companyName" type="text" id="companyName" class="form-control"
+                                placeholder="Enter Company Name">
+                        </div>
+
+                        <div class="mt-1 mb-3">
+                            <label for="interestedIn" class="form-label">I am interested in:</label>
+                            <div class="dropdown d-grid">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="interestedIn"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{categoryForm.get('interestedIn')?.value || 'Select Category'}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                    <li class="dropdown-item" (click)="categoryForm.get('interestedIn')!.setValue('Food'); 
+                                        foodCat.get('interestedInSubCategory')!.setValue('')">Food
+                                    </li>
+                                    <li class="dropdown-item" (click)="categoryForm.get('interestedIn')!.setValue('Human Resources'); 
+                                        foodCat.get('interestedInSubCategory')!.setValue('')">
+                                        Human Resources
+                                    </li>
+                                    <li class="dropdown-item" (click)="categoryForm.get('interestedIn')!.setValue('Tourism'); 
+                                        foodCat.get('interestedInSubCategory')!.setValue('')">
+                                        Tourism</li>
+                                </ul>
+                            </div>
+
+                            <div *ngIf="categoryForm.get('interestedIn')?.value === 'Food'">
+
+                                <label for="foodCat" class="form-label mt-1">Specifically:</label>
+                                <div class="dropdown d-grid">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="foodCat"
+                                        data-bs-toggle="dropdown" aria-expanded="false" value="listItem">
+                                        {{foodCat.get('interestedInSubCategory')?.value ||
+                                        'Select Food Sub Category'}}
+
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                        <li class="dropdown-item" id="listItem" *ngFor="let item of food"
+                                            (click)="foodCat.get('interestedInSubCategory')!.setValue(item.name)">
+                                            {{item.name}}
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div *ngIf="categoryForm.get('interestedIn')?.value === 'Human Resources'">
+
+                                <label for="HRCat" class="form-label mt-1">Specifically:</label>
+                                <div class="dropdown d-grid">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="HRCat"
+                                        data-bs-toggle="dropdown" aria-expanded="false" value="listItem">
+                                        {{foodCat.get('interestedInSubCategory')?.value ||
+                                        'Select HR Sub Category'}}
+
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                        <li class="dropdown-item" id="listItem" *ngFor="let item of hr"
+                                            (click)="foodCat.get('interestedInSubCategory')!.setValue(item.name)">
+                                            {{item.name}}
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div *ngIf="categoryForm.get('interestedIn')?.value === 'Tourism'">
+
+                                <label for="tourCat" class="form-label mt-1">Specifically:</label>
+                                <div class="dropdown d-grid">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="tourCat"
+                                        data-bs-toggle="dropdown" aria-expanded="false" value="listItem">
+                                        {{foodCat.get('interestedInSubCategory')?.value ||
+                                        'Select Tourism Sub Category'}}
+
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="interestedIn">
+                                        <li class="dropdown-item" id="listItem" *ngFor="let item of tourism"
+                                            (click)="foodCat.get('interestedInSubCategory')!.setValue(item.name)">
+                                            {{item.name}}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
-                        <div *ngIf="currentPage === 2 && companyRegisterForm.get('category')?.value === 'hr'">
-                            <h2 class="mb-4 text-center">Human Resources Company Registration Fields</h2>
-
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
-                                <button type="button" class="btn btn-primary" (click)="nextPage()">Next</button>
-                            </div>
+                        <div class="mb-3">
+                            <label for="IDNumber" class="form-label">Company ID Number:</label>
+                            <input formControlName="IDNumber" type="text" id="IDNumber" class="form-control"
+                                placeholder="Enter Company ID Number">
                         </div>
 
-                        <!-- PAGE 3 -->
-
-                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'food'">
-                            <h2 class="mb-4 text-center">Food page 3</h2>
-
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
-                            </div>
+                        <div class="mb-3">
+                            <label for="companyPhoneNumber" class="form-label">Company Phone Number:</label>
+                            <input formControlName="companyPhoneNumber" type="text" id="companyPhoneNumber"
+                                class="form-control" placeholder="+389 xx xxx xxx">
                         </div>
 
-                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'Tourism'">
-                            <h2 class="mb-4 text-center">Tourism page 3</h2>
-
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
-                            </div>
+                        <div class="mb-3">
+                            <label for="webPage" class="form-label">Company Web Page:</label>
+                            <input formControlName="webPage" type="text" id="webPage" class="form-control"
+                                placeholder="https://company-name.com">
                         </div>
 
-                        <div *ngIf="currentPage === 3 && companyRegisterForm.get('category')?.value === 'hr'">
-                            <h2 class="mb-4 text-center">HR page 3</h2>
-
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline" (click)="prevPage()">Previous</button>
-                            </div>
+                        <label for="address" class="form-label">Company Address:</label>
+                        <div class="input-group mb-3">
+                            <input type="address" id="address" class="form-control" placeholder="Enter Your Address"
+                                formControlName="country">
+                            <span class="input-group-text" id="basic-addon2"><button
+                                    class="btn btn-primary">Map</button></span>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="zipCode" class="form-label">Zip Code:</label>
+                            <input formControlName="zipCode" type="number" id="zipCode" class="form-control"
+                                placeholder="Zip Code ####">
+                        </div>
+
+                        <div class="mb-3 text-center">
+
+                            <button class="btn btn-primary" (click)="submitCompanyForm()"
+                                [disabled]="!companyRegisterForm.valid || categoryForm.invalid || foodCat.invalid">Create Account</button>
+
+                        </div>
                     </form>
                 </div>
             </div>

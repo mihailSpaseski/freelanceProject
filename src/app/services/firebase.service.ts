@@ -18,14 +18,14 @@ export class FirebaseService {
   productsRef: AngularFireList<Product>;
   usersRef: AngularFireList<any>;
   newsRef: AngularFireList<any>;
+  companyRef: AngularFireList<any>;
 
   productsUrl = '/products';
   usersUrl = '/users';
   newsUrl = '/news';
+  companyUrl = '/company';
   private basePath = '/uploads';
   private newsPath = '/news';
-  // userbyid = firebase.database().ref('/users');
-
 
   constructor(
     private database: AngularFireDatabase,
@@ -34,17 +34,15 @@ export class FirebaseService {
     this.productsRef = database.list(this.productsUrl);
     this.usersRef = database.list(this.usersUrl);
     this.newsRef = database.list(this.newsUrl);
+    this.companyRef = database.list(this.companyUrl);
   }
-
-  // createUser(value: any): Promise<boolean> {
-  //   return new Promise((resolve, reject) => {
-  //     this.usersRef.push(value);
-  //     resolve(true);
-  //   });
-  // }
 
   createUser(value: any) {
     this.usersRef.push(value);
+  }
+
+  createCompany(value: any) {
+    this.companyRef.push(value);
   }
 
   getUser() {
@@ -58,14 +56,6 @@ export class FirebaseService {
   updateUser(key: string, value: any) {
     return this.usersRef.update(key, value);
   }
-
-  // getUsersbyId(id: any): Promise<User> {
-  //   return new Promise((resolve, reject) => {
-  //     this.userbyid.child(id).once('value', (snapshot) => {
-  //       resolve(snapshot.val());
-  //     });
-  //   });
-  // }
 
   createProduct(value: any) {
     this.productsRef.push(value);
@@ -133,7 +123,7 @@ export class FirebaseService {
 
   pushFileToStorage(
     fileUpload: FileUpload,
-    product: any,
+    product: any
   ): Observable<number | undefined> {
     const filePath = `${this.basePath}/${fileUpload.name}`;
     const storageRef = this.storage.ref(filePath);
@@ -155,7 +145,7 @@ export class FirebaseService {
 
   pushNewsToStorage(
     fileUpload: FileUpload,
-    article: any,
+    article: any
   ): Observable<number | undefined> {
     const filePath = `${this.newsPath}/${fileUpload.name}`;
     const storageRef = this.storage.ref(filePath);

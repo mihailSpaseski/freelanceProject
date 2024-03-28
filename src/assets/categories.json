@@ -54,10 +54,57 @@
   },
   {
     "name": "Human Resources",
-    "routerLink": "/categories/human-resources"
+    "subCategories": [ 
+      {
+        "name": "Construction"
+      },
+      {
+        "name": "Session Workers"
+      },
+      {
+        "name": "HoReCa"
+      },
+      {
+        "name": "Manufactory"
+      },
+      {
+        "name": "Artisan"
+      },
+      {
+        "name": "Experts"
+      },
+      {
+        "name": "Outsourcing"
+      },
+      {
+        "name": "Other"
+      }
+     ]
   },
   {
     "name": "Tourism",
-    "routerLink": "/categories/tourism"
+    "subCategories": [ 
+      {
+        "name": "Tour operator"
+      },
+      {
+        "name": "Travel Agency"
+      },
+      {
+        "name": "Tour Guide"
+      },
+      {
+        "name": "Seminars"
+      },
+      {
+        "name": "Hotels"
+      },
+      {
+        "name": "Outdoor activities"
+      },
+      {
+        "name": "Rural tourism"
+      }
+     ]
   }
 ]
